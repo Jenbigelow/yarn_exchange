@@ -1,4 +1,5 @@
 
+"""Server for yarn stash exchange."""
 from flask import Flask
 
 app = Flask(__name__)
