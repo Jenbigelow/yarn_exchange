@@ -64,7 +64,7 @@ class Seller(db.Model):
     __tablename__ = "sellers"
 
     seller_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    seller_name = db.Column(db.String)
+    seller_name = db.Column(db.String, unique=True)
     seller_location = db.Column(db.String)
 
     yarn = db.relationship("Yarn", back_populates="seller")

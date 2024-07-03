@@ -81,6 +81,11 @@ def get_seller_by_id(seller_id):
     selected_seller = Seller.query.get(seller_id)
     return selected_seller
 
+def get_seller_by_Rav_name(seller_name):
+    """Get a seller by Ravelry name"""
+
+    return Seller.query.filter(Seller.seller_name == seller_name).first()
+
 def look_up_yarn_by_seller_id(seller_id):
     yarns_from_seller = Yarn.query.filter(Yarn.seller_id == seller_id).all()
     return yarns_from_seller
