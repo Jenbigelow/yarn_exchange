@@ -1,10 +1,16 @@
 
 """Server for yarn stash exchange."""
 from flask import Flask, jsonify, render_template
-from project.backend.model import db, Yarn
-import project.backend.crud as crud
+from model import db, Yarn, connect_to_db
+import crud as crud
+
+from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+
+app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
+
 
 
 # @app.route('/')
@@ -14,9 +20,9 @@ app = Flask(__name__)
 
 @app.route('/api/yarns')
 def get_yarns():
-    yarns= crud.all_yarns()
-    return jsonify({yarns.yarn_id: yarn.to_dict() for yarn in yarns})
+    return {"yarns": crud.all_yarns()}
+
 
 if __name__ == "__main__":
-
+    connect_to_db(app)
     app.run(host="0.0.0.0", debug=True, port=6060)

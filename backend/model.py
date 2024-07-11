@@ -91,7 +91,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///yarn_exchange", echo=True):
 
 
 if __name__ == "__main__":
-    from project.backend.server import app
+    from server import app
 
     # Call connect_to_db(app, echo=False) if your program output gets
     # too annoying; this will tell SQLAlchemy not to print out every

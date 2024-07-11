@@ -7,9 +7,9 @@ import os
 import json
 import re
 
-import project.backend.crud as crud
-from project.backend.model import connect_to_db, db
-from project.backend.server import app
+import crud as crud
+from model import connect_to_db, db
+from server import app
 
 os.system("dropdb yarn_exchange")
 os.system("createdb yarn_exchange")

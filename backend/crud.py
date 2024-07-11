@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from project.backend.model import db, User, Yarn, Favorite, Seller, connect_to_db
+from model import db, User, Yarn, Favorite, Seller, connect_to_db
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -91,5 +91,5 @@ def look_up_yarn_by_seller_id(seller_id):
     return yarns_from_seller
 
 if __name__ == '__main__':
-    from project.backend.server import app
+    from server import app
     connect_to_db(app)
