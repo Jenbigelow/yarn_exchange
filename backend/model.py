@@ -36,7 +36,20 @@ class Yarn(db.Model):
     favorites = db.relationship("Favorite", back_populates="yarn")
     seller = db.relationship("Seller", back_populates="yarn")
 
-    
+    @classmethod
+    def all_yarns(cls):
+        """Return all yarns."""
+
+        return [
+            {
+                "yarn_id": yarn.yarn_id,
+                "yarn_name": yarn.yarn_name,
+                "yarn_photo":yarn.yarn_photo,
+                "yarn_price": yarn.yarn_price
+            }
+            for yarn in cls.query.all()
+        ]
+
 
     def __repr__(self):
         return f"<Yarn yarn_id={self.yarn_id} title={self.yarn_name}>"
