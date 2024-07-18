@@ -40,6 +40,7 @@ def get_yarn_by_id(yarn_id):
     return selected_yarn
 
 
+
 def yarn_fav(user, yarn, favorite): 
     """Create a favorite yarn"""
     favorited_yarn = Favorite(user=user, yarn=yarn, favorite=favorite)

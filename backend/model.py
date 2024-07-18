@@ -45,14 +45,15 @@ class Yarn(db.Model):
                 "yarn_id": yarn.yarn_id,
                 "yarn_name": yarn.yarn_name,
                 "yarn_photo":yarn.yarn_photo,
-                "yarn_price": yarn.yarn_price
+                "yarn_price": yarn.yarn_price,
+                "seller_name":yarn.seller.seller_name
             }
             for yarn in cls.query.all()
         ]
 
 
     def __repr__(self):
-        return f"<Yarn yarn_id={self.yarn_id} title={self.yarn_name}>"
+        return f"<Yarn yarn_id={self.yarn_id} name={self.yarn_name}>"
     
     def to_dict(self):
         return {'yarn_id': self.yarn_id,

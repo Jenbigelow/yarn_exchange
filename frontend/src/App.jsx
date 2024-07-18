@@ -41,7 +41,7 @@ function App() {
   <Route path = "" element = {<Layout />}/><Route/>
   <Route path="About" element={<About />} /><Route/>
   <Route path="Yarns" element ={<Yarns yarns = {yarns}/>}/> <Route/>
-    <Route path="/yarns/:yarnId" element={<Yarn/>} />
+    <Route path="/yarns/:yarnId" element={<Yarn yarns = {yarns}/>} />
  
   </Routes>
   </div>
@@ -77,8 +77,8 @@ for (const yarn of Object.values(yarns)) {
   );
 
   yarnCards.push(yarnCard);
-}
 
+}
   return (
     <>
     <h1>Yarn</h1>
@@ -94,16 +94,35 @@ for (const yarn of Object.values(yarns)) {
   )
 }
 
-const Yarn = () => {
+
+function Yarn(props) {
+  const { yarns } = props
 // const params = useParams()
 // const yarnId = params.yarnId
   const {yarnId} = useParams();
+  const index = Number(yarnId)-1
+  const yarn_object = Object.values(yarns)
+  const yarn = yarn_object[index]
 
+  console.log(yarn.seller_name)
+
+  
+  
 return (
   <>
-  <p>Hello {yarnId}!</p>
+  <div>{yarn.yarn_name}
+  <div>
+    ${yarn.yarn_price}
+    </div>
+  <div>
+  <img src={`${yarn.yarn_photo}`}/>
+  </div>
+  <div>
+    {yarn.seller_name}
+  </div>
   <div>
       <Link to="/yarns">Back to Yarns</Link>
+  </div>
   </div>
   </>
 
@@ -112,16 +131,17 @@ return (
 
 function YarnCard(props){
   const {yarnId, yarnName, yarnPrice, yarnPhoto} = props
-  console.log(props)
+  // console.log(props)
   return(
-
-    <div>{yarnName}${yarnPrice}
+    <div>
+    <div>
+  <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
+  </div>
+  ${yarnPrice}
     <div>
     <img src={`${yarnPhoto}`}/>
     </div>
-    <div>
-<Link to={`/yarns/${yarnName}`}> {yarnName}</Link>
-</div>
+
 
   </div>
 
