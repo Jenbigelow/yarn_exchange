@@ -35,7 +35,11 @@ function App() {
 
 
   return(
-  <> 
+    <> 
+    {yarns === null ? (
+    <div>Loading...</div>
+  ) :(
+
   <div>
   <Routes>
   <Route path = "" element = {<Layout />}/><Route/>
@@ -45,8 +49,10 @@ function App() {
  
   </Routes>
   </div>
-  </>
-  )
+
+  )}
+    </>
+)
 }
 
 
@@ -81,7 +87,7 @@ for (const yarn of Object.values(yarns)) {
 }
   return (
     <>
-    <h1>Yarn</h1>
+    <h1>Yarns</h1>
     <div>
   
       </div>

@@ -53,8 +53,8 @@ for yarn in stashes:
     if "$" in notes_html:
         seller_name = rav_username
         seller_location = user_location
-        yarn_price = re.search(r"[0-9]+", notes_html).group()
-        yarn_price = int(yarn_price)
+        yarn_price = re.search(r"\$[0-9]+", notes_html).group()
+        yarn_price = int(yarn_price[1:])
         yarn_name = yarn_JSON_data["name"]
         yarn_weight = yarn_JSON_data["yarn_weight_name"]
         yarn_skeins = yarn_JSON_data["packs"][0]["skeins"]
