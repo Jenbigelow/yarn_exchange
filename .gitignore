@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+secrets*
+env
+*.pyc
+.DS_Store
+backend/__pycache__/
+frontend/package-lock.json

@@ -46,10 +46,28 @@ class Yarn(db.Model):
                 "yarn_name": yarn.yarn_name,
                 "yarn_photo":yarn.yarn_photo,
                 "yarn_price": yarn.yarn_price,
-                "seller_name":yarn.seller.seller_name
             }
             for yarn in cls.query.all()
         ]
+    @classmethod
+    def get_yarn_by_id(cls, yarn_id):
+        """Return yarn by id"""
+        yarn = cls.query.get(yarn_id)
+        return (
+            {
+                "yarn_id": yarn.yarn_id,
+                "yarn_name": yarn.yarn_name,
+                "yarn_photo":yarn.yarn_photo,
+                "yarn_price": yarn.yarn_price,
+                "yarn_skeins": yarn.yarn_skeins,
+                "yarn_company": yarn.yarn_company,
+                "yarn_weight": yarn.yarn_weight,
+                "dye_lot": yarn.dye_lot,
+                "seller_name":yarn.seller.seller_name,
+                "seller_location": yarn.seller.seller_location
+            }
+
+        )
 
 
     def __repr__(self):
