@@ -10,12 +10,14 @@ import {
 import Yarn from './Yarn'
 import Yarns from './Yarns'
 import About from './About'
+import Login from './Login'
+import User from './User'
 
 function Layout() {
   return(
 <nav>
   <div>
-  <Link to="/about">About</Link>
+  <Link to="/login">Login</Link>
   </div>
   <div>
   <Link to="/yarns">Yarns</Link>
@@ -28,15 +30,6 @@ function Layout() {
 
   
 function App() {
-  // const [yarns, setYarns] = useState({});
-  // useEffect(() => {
-  //   fetch("/api/yarns")
-  //     .then((response) => response.json())
-  //     .then((yarnData) => {
-  //       setYarns(yarnData.yarns);
-  //     });
-  // }, []);
-
 
   return(
     <> 
@@ -45,10 +38,10 @@ function App() {
   <div>
   <Routes>
   <Route path = "" element = {<Layout />}/><Route/>
-  <Route path="About" element={<About />} /><Route/>
+  <Route path = "/user/:userID" element = {<User/>}/><Route/>
+  <Route path="Login" element={<Login />} /><Route/>
   <Route path="Yarns" element ={<Yarns/>}/> <Route/>
     <Route path="/yarns/:yarnId" element={<Yarn />} />
- 
   </Routes>
   </div>
 

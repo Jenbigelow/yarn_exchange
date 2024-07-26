@@ -80,3 +80,9 @@ for yarn in stashes:
 
     
 
+for n in range(10):
+    email = f'user{n}@test.com'  # Voila! A unique email!
+    password = 'test'
+    user_in_db = crud.create_user(email, password)
+    db.session.add(user_in_db)
+db.session.commit()

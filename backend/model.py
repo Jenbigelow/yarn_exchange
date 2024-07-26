@@ -18,6 +18,16 @@ class User(db.Model):
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
     
+    @classmethod
+    def get_user_by_email(cls, email):
+        """Return user by email"""
+        user = cls.query.filter(cls.email == email).first()
+        return (
+            {"email": user.email, "password": user.password}
+        )
+
+
+    
 class Yarn(db.Model):
     """A yarn."""
 
