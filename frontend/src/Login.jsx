@@ -62,7 +62,6 @@ const updatePassword = (evt) => {
       <input type="submit"/>
     </p>
     <p>{message}</p>
-    <p>{userID}</p>
   </form>
   </>
   )
