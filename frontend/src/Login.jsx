@@ -31,7 +31,7 @@ const handleLogin = (evt) => {
             {
               if(responseJSON.status == 'true'){
                 setUserID(responseJSON.userID)
-                navigate(`/user/${userID}`)}
+                navigate(`/user/${responseJSON.userID}`)}
             
             else{{ setMessage(responseJSON.message)}}})
       
