@@ -34,8 +34,21 @@ def login():
        return jsonify({'status': 'true', 'message': 'Logged in', 'userID': account_user.user_id})
     else:
        return jsonify({"status": 'false', "message": "Password does not match"})
-  
-  
+
+@app.route("/api/createaccount", methods=['POST'])
+def createaccount():
+   email = request.json.get("email")
+   password = request.json.get("password")
+
+   account_user = crud.get_user_by_email(email)
+   if account_user == None:
+       create_user = crud.create_user(email, password)
+       db.session.add(create_user)
+       db.session.commit()
+       return jsonify({"status": 'true', "message": "User created", 'userID': create_user.user_id})
+   else:
+      return jsonify({"status": 'false', "message": "User already exists"})
+
 
 
 if __name__ == "__main__":
