@@ -45,10 +45,22 @@ def createaccount():
        create_user = crud.create_user(email, password)
        db.session.add(create_user)
        db.session.commit()
+       session['user'] = account_user.user_id
        return jsonify({"status": 'true', "message": "User created", 'userID': create_user.user_id})
    else:
       return jsonify({"status": 'false', "message": "User already exists"})
 
+@app.route("/api/likes/<yarn_id>", methods=['POST'])
+def liking(yarn_id):
+   yarn = crud.get_yarn_by_id(yarn_id)
+   like = request.json.get("like")
+   primary_key = session.get('user')
+   user = crud.get_user_by_id(primary_key)
+
+   favorite_status = crud.yarn_fav(user = user, yarn = yarn, favorite = like)
+   db.session.add(favorite_status)
+   db.session.commit()
+   return jsonify({"status": like, "user": primary_key, "yarn": yarn_id})
 
 
 if __name__ == "__main__":
