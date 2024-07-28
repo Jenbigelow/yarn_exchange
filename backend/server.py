@@ -56,6 +56,8 @@ def liking(yarn_id):
    like = request.json.get("like")
    primary_key = session.get('user')
    user = crud.get_user_by_id(primary_key)
+   if user == None:
+      return(({"status": like, "user": primary_key, "yarn": yarn_id}))
 
    favorite_status = crud.yarn_fav(user = user, yarn = yarn, favorite = like)
    db.session.add(favorite_status)
