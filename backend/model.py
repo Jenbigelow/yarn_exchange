@@ -100,6 +100,22 @@ class Favorite(db.Model):
     
     yarn = db.relationship("Yarn", back_populates="favorites")
     user = db.relationship("User", back_populates="favorites")
+
+    @classmethod
+    def look_up_favorited_yarn_by_user_id(cls, user_id):
+        """Return yarn by id"""
+        
+        return [
+            {
+                "yarn_id": favorited_yarn_by_user.yarn.yarn_id,
+                "yarn_name": favorited_yarn_by_user.yarn.yarn_name,
+                "yarn_photo":favorited_yarn_by_user.yarn.yarn_photo,
+                "yarn_price": favorited_yarn_by_user.yarn.yarn_price,
+                "seller_name":favorited_yarn_by_user.yarn.seller.seller_name,
+                "seller_location": favorited_yarn_by_user.yarn.seller.seller_location
+            }
+            for favorited_yarn_by_user in cls.query.filter(cls.user_id == user_id).all()
+        ]
     
 
     def __repr__(self):

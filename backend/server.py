@@ -1,7 +1,7 @@
 
 """Server for yarn stash exchange."""
 from flask import Flask, jsonify, render_template, request, session
-from model import db, Yarn, connect_to_db, User
+from model import db, Yarn, connect_to_db, User, Favorite
 import crud as crud
 
 
@@ -63,6 +63,10 @@ def liking(yarn_id):
    db.session.add(favorite_status)
    db.session.commit()
    return jsonify({"status": like, "user": primary_key, "yarn": yarn_id})
+
+@app.route("/api/user/<user_id>")
+def get_user(user_id):
+  return {"yarns": Favorite.look_up_favorited_yarn_by_user_id(int(user_id))}
 
 
 if __name__ == "__main__":

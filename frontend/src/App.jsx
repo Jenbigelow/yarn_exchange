@@ -42,7 +42,7 @@ function App() {
   <div>
   <Routes>
   <Route path = "" element = {<Layout />}/><Route/>
-  <Route path = "/user/:userID" element = {<User/>}/><Route/>
+  <Route path = "/user/:userId" element = {<User/>}/><Route/>
   <Route path="CreateAccount" element={<CreateAccount />} /><Route/>
   <Route path="Login" element={<Login />} /><Route/>
   <Route path="Yarns" element ={<Yarns/>}/> <Route/>
