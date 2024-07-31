@@ -50,7 +50,7 @@ def yarn_fav(user, yarn, favorite):
 def look_up_favorited_yarn_by_user_id(user_id):
     """Look up a favorited yarn by user_id"""
 
-    favorited_yarns_by_user=Favorite.query.filter(Favorite.user_id == user_id).all()
+    favorited_yarns_by_user=Favorite.query.filter(Favorite.user_id == user_id, Favorite.favorite == True).all()
     return favorited_yarns_by_user
 
 def look_up_favorited_yarn_by_yarn_id(yarn_id):
@@ -58,6 +58,19 @@ def look_up_favorited_yarn_by_yarn_id(yarn_id):
 
     rated_yarns=Favorite.query.filter(Favorite.yarn_id == yarn_id).all()
     return rated_yarns
+
+def find_fav_yarn(user_id, yarn_id):
+    """Find the favorited yarn"""
+    fav_yarn = Favorite.query.filter(Favorite.user_id == user_id, Favorite.yarn_id == yarn_id).first()
+    return fav_yarn
+
+def change_fav_status(user_id, yarn_id, favorite):
+    """Change favorite status of an existing yarn"""
+
+    fav_yarn = Favorite.query.filter(Favorite.user_id == user_id, Favorite.yarn_id == yarn_id).first()
+    fav_yarn.favorite = favorite
+    return fav_yarn
+
 
 def get_user_by_email(email):
     """Get a user by email"""

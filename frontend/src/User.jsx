@@ -16,6 +16,7 @@ function User(){
         setYarns(yarnData.yarns);
       });
   }, []);
+  console.log(yarns)
 
   const yarnCards =[]
     for (const yarn of Object.values(yarns)) {

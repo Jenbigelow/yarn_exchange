@@ -114,7 +114,7 @@ class Favorite(db.Model):
                 "seller_name":favorited_yarn_by_user.yarn.seller.seller_name,
                 "seller_location": favorited_yarn_by_user.yarn.seller.seller_location
             }
-            for favorited_yarn_by_user in cls.query.filter(cls.user_id == user_id).all()
+            for favorited_yarn_by_user in cls.query.filter(cls.user_id == user_id, cls.favorite == True).all()
         ]
     
 
