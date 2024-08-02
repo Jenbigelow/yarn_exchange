@@ -74,12 +74,27 @@ class Yarn(db.Model):
                 "yarn_weight": yarn.yarn_weight,
                 "dye_lot": yarn.dye_lot,
                 "seller_name":yarn.seller.seller_name,
-                "seller_location": yarn.seller.seller_location
+                "seller_location": yarn.seller.seller_location,
+                "seller_id": yarn.seller.seller_id
             }
 
         )
 
-
+    @classmethod
+    def look_up_yarn_by_seller_id(cls, seller_id):
+        """Return all yarn of seller"""
+        return [
+            {
+                "yarn_id": seller_yarn.yarn_id,
+                "yarn_name": seller_yarn.yarn_name,
+                "yarn_photo": seller_yarn.yarn_photo,
+                "yarn_price": seller_yarn.yarn_price,
+                "seller_id": seller_yarn.seller.seller_id,
+                "seller_name":seller_yarn.seller.seller_name,
+                "seller_location": seller_yarn.seller.seller_location
+            }
+            for seller_yarn in cls.query.filter(cls.seller_id == seller_id).all()
+        ]
     def __repr__(self):
         return f"<Yarn yarn_id={self.yarn_id} name={self.yarn_name}>"
     
@@ -136,6 +151,7 @@ class Seller(db.Model):
 
     def __repr__(self):
         return f"<Seller seller_id={self.seller_id} seller_location={self.seller_location}>"
+    
 
 def connect_to_db(flask_app, db_uri="postgresql:///yarn_exchange", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

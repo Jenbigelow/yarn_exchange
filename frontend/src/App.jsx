@@ -13,6 +13,7 @@ import About from './About'
 import Login from './Login'
 import User from './User'
 import CreateAccount from './CreateAccount';
+import Seller from './Seller';
 
 function Layout() {
   return(
@@ -43,6 +44,7 @@ function App() {
   <Routes>
   <Route path = "" element = {<Layout />}/><Route/>
   <Route path = "/user/:userId" element = {<User/>}/><Route/>
+  <Route path = "/seller/:sellerId" element = {<Seller/>}/><Route/>
   <Route path="CreateAccount" element={<CreateAccount />} /><Route/>
   <Route path="Login" element={<Login />} /><Route/>
   <Route path="Yarns" element ={<Yarns/>}/> <Route/>

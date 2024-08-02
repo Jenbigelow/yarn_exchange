@@ -1,7 +1,7 @@
 
 """Server for yarn stash exchange."""
 from flask import Flask, jsonify, render_template, request, session
-from model import db, Yarn, connect_to_db, User, Favorite
+from model import db, Yarn, connect_to_db, User, Favorite, Seller
 import crud as crud
 
 
@@ -70,6 +70,10 @@ def liking(yarn_id):
 @app.route("/api/user/<user_id>")
 def get_user(user_id):
   return {"yarns": Favorite.look_up_favorited_yarn_by_user_id(int(user_id))}
+
+@app.route("/api/seller/<seller_id>")
+def get_seller(seller_id):
+  return {"yarns": Yarn.look_up_yarn_by_seller_id(int(seller_id))}
 
 
 if __name__ == "__main__":

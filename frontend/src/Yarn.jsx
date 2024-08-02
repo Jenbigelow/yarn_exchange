@@ -77,7 +77,7 @@ import {
       {yarn.skeins}
     </div>
     <div>
-      Ravelry seller: {yarn.seller_name}
+      Ravelry seller:  <Link to ={`/seller/${yarn.seller_id}`}>{yarn.seller_name}</Link>
     </div>
     <div>
       Location: {yarn.seller_location}
