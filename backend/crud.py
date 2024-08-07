@@ -1,7 +1,7 @@
 """CRUD operations."""
 
 from model import db, User, Yarn, Favorite, Seller, connect_to_db
-
+#todo filter for yarn aspects that loops through list that user selected
 def create_user(email, password):
     """Create and return a new user."""
 

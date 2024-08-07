@@ -14,6 +14,7 @@ import Login from './Login'
 import User from './User'
 import CreateAccount from './CreateAccount';
 import Seller from './Seller';
+import Search from './Search';
 
 function Layout() {
   return(
@@ -49,6 +50,7 @@ function App() {
   <Route path="Login" element={<Login />} /><Route/>
   <Route path="Yarns" element ={<Yarns/>}/> <Route/>
     <Route path="/yarns/:yarnId" element={<Yarn />} />
+    <Route path="/yarn_form" element ={<Search/>}/> <Route/>
   </Routes>
   </div>
 

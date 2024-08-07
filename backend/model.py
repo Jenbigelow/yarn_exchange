@@ -79,6 +79,25 @@ class Yarn(db.Model):
             }
 
         )
+    @classmethod
+    def get_yarn_weights(cls):
+        yarns= cls.query.all()
+        yarn_weights = []
+        for yarn in yarns:
+            if yarn.yarn_weight not in yarn_weights:
+                yarn_weights.append(yarn.yarn_weight)
+        return yarn_weights
+    
+    @classmethod
+    def get_yarn_by_weights(cls, yarn_weight):
+                return [
+            {
+                "yarn_id": yarn.yarn_id,
+                "yarn_name": yarn.yarn_name,
+                "yarn_photo":yarn.yarn_photo,
+                "yarn_price": yarn.yarn_price,
+            }
+            for yarn in cls.query.filter(cls.yarn_weight==yarn_weight)]
 
     @classmethod
     def look_up_yarn_by_seller_id(cls, seller_id):

@@ -75,6 +75,7 @@ for yarn in stashes:
             else:
                 seller = seller_exists
             yarn = crud.create_yarn(yarn_name, yarn_price, yarn_photo, yarn_skeins, yarn_company, yarn_weight, dye_lot, seller)
+            # clean up so that data isn't called before the crud function
             db.session.add(yarn)
             db.session.commit()
 

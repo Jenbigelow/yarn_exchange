@@ -15,7 +15,7 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route("/api/yarns")
 def get_yarns():
-  return {"yarns": Yarn.all_yarns()}
+  return jsonify({"yarns": Yarn.all_yarns()})
 
 @app.route("/api/yarns/<yarn_id>")
 def get_yarn(yarn_id):
@@ -69,13 +69,20 @@ def liking(yarn_id):
 
 @app.route("/api/user/<user_id>")
 def get_user(user_id):
-  return {"yarns": Favorite.look_up_favorited_yarn_by_user_id(int(user_id))}
+  return jsonify({"yarns": Favorite.look_up_favorited_yarn_by_user_id(int(user_id))})
 
 @app.route("/api/seller/<seller_id>")
 def get_seller(seller_id):
-  return {"yarns": Yarn.look_up_yarn_by_seller_id(int(seller_id))}
+  return jsonify({"yarns": Yarn.look_up_yarn_by_seller_id(int(seller_id))})
 
+@app.route("/api/yarn_form")
+def list_yarn_weights():
+   print(Yarn.get_yarn_weights())
+   return jsonify({"yarn_weights": Yarn.get_yarn_weights()})
 
+@app.route("/api/yarns_search")
+def search_yarns(yarn_weight):
+   return jsonify({"yarns": Yarn.get_yarn_by_weights(yarn_weight)})
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True, port=6060)
