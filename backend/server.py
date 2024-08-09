@@ -80,8 +80,9 @@ def list_yarn_weights():
    print(Yarn.get_yarn_weights())
    return jsonify({"yarn_weights": Yarn.get_yarn_weights()})
 
-@app.route("/api/yarns_search")
-def search_yarns(yarn_weight):
+@app.route("/api/yarns_search", methods=['POST'])
+def search_yarns():
+   yarn_weight = request.json.get("yarn_weight")
    return jsonify({"yarns": Yarn.get_yarn_by_weights(yarn_weight)})
 if __name__ == "__main__":
     connect_to_db(app)

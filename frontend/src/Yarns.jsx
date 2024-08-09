@@ -4,20 +4,36 @@ import {
     Outlet,
   } from "react-router-dom";
 
-function Yarns() {
-    const [yarns, setYarns] = useState({});
-    
+function GetYarns(props){
 
-    
-    useEffect(() => {
-      fetch("/api/yarns")
-        .then((response) => response.json())
-        .then((yarnData) => {
-          setYarns(yarnData.yarns);
-        });
-    }, []);
+const [yarns, setYarns] = useState(props.yarns);
+if (yarns === undefined){
+    fetch("/api/yarns")
+      .then((response) => response.json())
+      .then((yarnData) => {
+        setYarns(yarnData.yarns);
+        console.log(yarnData.yarns)
+      });
+    return (
+      <>
 
+      {yarns === undefined ? (
+        <div>Loading...</div>
+      ) : (<Yarns yarns ={yarns}/>)
+    }
+    </>
+      
+    )
 
+  }
+  else{
+
+  return <Yarns yarns ={yarns}/>
+}
+}
+
+function Yarns(props) {
+  const {yarns} = props
 
     const yarnCards =[]
     // if yarn is null
@@ -108,5 +124,5 @@ function YarnCard(props){
   
   )
   }
-
-      export default Yarns
+export default GetYarns
+export {Yarns}

@@ -8,6 +8,7 @@ import {
   useParams
 } from "react-router-dom";
 import Yarn from './Yarn'
+import GetYarns from './Yarns';
 import Yarns from './Yarns'
 import About from './About'
 import Login from './Login'
@@ -48,9 +49,10 @@ function App() {
   <Route path = "/seller/:sellerId" element = {<Seller/>}/><Route/>
   <Route path="CreateAccount" element={<CreateAccount />} /><Route/>
   <Route path="Login" element={<Login />} /><Route/>
-  <Route path="Yarns" element ={<Yarns/>}/> <Route/>
+  <Route path="/yarns" element ={<GetYarns/>}/> <Route/>
     <Route path="/yarns/:yarnId" element={<Yarn />} />
     <Route path="/yarn_form" element ={<Search/>}/> <Route/>
+    <Route path="/yarns/search/:yarnSelect" element ={<Search/>}/> <Route/>
   </Routes>
   </div>
 

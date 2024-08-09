@@ -5,12 +5,14 @@ import {
   useNavigate,
   redirect
 } from "react-router-dom";
+import GetYarns from "./Yarns"
 
 function Search(){
 
     const [yarnWeights, setYarnWeights] = useState('')
-    const [yarnSearch, setYarnSearch] = useState('')
     const [yarnSelect, setYarnSelect]= useState('')
+    const [yarns, setYarns] = useState('')
+    const navigate = useNavigate();
     useEffect(() => {
         fetch(`/api/yarn_form`)
           .then((response) => response.json())
@@ -44,14 +46,27 @@ function Search(){
     const handleSearch = (evt) => {
         evt.preventDefault()
         console.log("Form submitting")
+        console.log(yarnSelect)
         fetch("/api/yarns_search", {
             method: "POST",
-            body: JSON.stringify({'yarn_weight': yarnSearch}),
+            body: JSON.stringify({'yarn_weight': yarnSelect}),
             headers: {'Content-Type': 'application/json'}
           })
+
+          .then((response) => response.json())
+          .then((yarnData) => {
+            setYarns(yarnData.yarns);
+            // return(<Yarns yarns = {yarnData.yarns}/>)
+            navigate(`/yarns/search/${yarnSelect}`)
+            
+          }
+        
+        );
     }
+    if (yarns === ''){
     return(
         <>
+
         {yarnWeights === '' ? (
             <div>Loading...</div>
           ) : (
@@ -64,14 +79,20 @@ function Search(){
     </p>
             </form>
           )}
-
-
-
-         
+        
         </>
     )
 }
 
+else{console.log(yarns)
+  
+  return(
+
+    
+    <GetYarns yarns = {yarns}/>
+  )
+}
+}
 function YarnWeightOptions(props){
     const {yarnWeight, yarnSelect, handleSelection}= props
     // const [option, setOption] = useState (false)
@@ -93,17 +114,5 @@ function YarnWeightOptions(props){
     )
 
 }
-
-// function RadioButton(props){
-//   const {label, value, handleSearch}= props
-
-//   return(
-//     <label>
-//       <input type ="radio" checked= {value} onChange = {handleSearch}/>
-//       {label}
-//     </label>
-//   )
-
-// }
 
 export default Search
