@@ -45,7 +45,7 @@ def createaccount():
        create_user = crud.create_user(email, password)
        db.session.add(create_user)
        db.session.commit()
-       session['user'] = account_user.user_id
+       session['user'] = create_user.user_id
        return jsonify({"status": 'true', "message": "User created", 'userID': create_user.user_id})
    else:
       return jsonify({"status": 'false', "message": "User already exists"})

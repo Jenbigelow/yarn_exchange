@@ -34,7 +34,7 @@ function User(){
     }
 return(
   <>
-   <><h3>Hi</h3></>
+   <><h3>Your favorites</h3></>
    <div>{yarnCards}</div>
    <Link to="/yarns">All Yarns</Link>
    </>)
