@@ -53,16 +53,18 @@ def createaccount():
 @app.route("/api/likes/<yarn_id>", methods=['POST'])
 def liking(yarn_id):
    yarn = crud.get_yarn_by_id(yarn_id)
-   like = request.json.get("like")
-   primary_key = session.get('user')
+   primary_key = request.json.get('user')
    user = crud.get_user_by_id(primary_key)
 
-   if user == None:
-      return(jsonify({"status": like, "user": primary_key, "yarn": yarn_id}))
    if crud.find_fav_yarn(primary_key, yarn_id) != None:
+      if crud.find_fav_status(primary_key, yarn_id):
+         like = False
+      else:
+         like = True
+      
       favorite_status = crud.change_fav_status(primary_key, yarn_id, like)
    else:
-      favorite_status = crud.yarn_fav(user = user, yarn = yarn, favorite = like)
+      favorite_status = crud.yarn_fav(user = user, yarn = yarn, favorite = True)
    db.session.add(favorite_status)
    db.session.commit()
    return jsonify({"status": like, "user": primary_key, "yarn": yarn_id})

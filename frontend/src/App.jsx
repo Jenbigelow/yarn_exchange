@@ -19,6 +19,7 @@ import Search from './Search';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 import SessionStatus from './SessionStatus';
 
 function Layout() {
@@ -70,9 +71,8 @@ function App() {
 function Navigationbar() {
   const sessionStatus = SessionStatus()
   return (
-    <Nav>
-      <Navbar>
-
+      <Navbar expand="lg" fixed = "top">
+      <Container>
       <Nav.Item>
         <Link to="/yarns">Yarns</Link>
         </Nav.Item>
@@ -89,9 +89,9 @@ function Navigationbar() {
       <Link to="/createaccount">Create Account</Link>
       </Nav.Item>
       </>}
-      
+      </Container>
         </Navbar>
-    </Nav>
+
   )
   }
 

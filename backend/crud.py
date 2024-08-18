@@ -71,6 +71,12 @@ def change_fav_status(user_id, yarn_id, favorite):
     fav_yarn.favorite = favorite
     return fav_yarn
 
+def find_fav_status(user_id, yarn_id):
+    """Find favorite status of an existing yarn"""
+
+    fav_yarn = Favorite.query.filter(Favorite.user_id == user_id, Favorite.yarn_id == yarn_id).first()
+    favorite_status = fav_yarn.favorite
+    return favorite_status
 
 def get_user_by_email(email):
     """Get a user by email"""
