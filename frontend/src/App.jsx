@@ -19,6 +19,7 @@ import Search from './Search';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row';
+import SessionStatus from './SessionStatus';
 
 function Layout() {
   return(
@@ -57,6 +58,7 @@ function App() {
     <Route path="/yarns/:yarnId" element={<Yarn />} />
     <Route path="/yarn_form" element ={<Search/>}/> <Route/>
     <Route path="/yarns/search/:yarnSelect" element ={<Search/>}/> <Route/>
+    <Route path="/yarns/price" element ={<Yarns/>}/> <Route/>
   </Routes>
   </div>
 
@@ -66,21 +68,28 @@ function App() {
 }
 
 function Navigationbar() {
+  const sessionStatus = SessionStatus()
   return (
     <Nav>
       <Navbar>
-    <Nav.Item>
-      <Link to="/login">Login</Link>
-      </Nav.Item>
-    <Nav.Item>
-      <Link to="/createaccount">Create Account</Link>
-      </Nav.Item>
+
       <Nav.Item>
         <Link to="/yarns">Yarns</Link>
         </Nav.Item>
         <Nav.Item>
         <Link to="/yarns/search/:yarnSelect">Filter</Link>
         </Nav.Item>
+        {sessionStatus !== null 
+        
+      ? <Nav.Item><Link to={`/user/${sessionStatus}`}> Your favorites</Link></Nav.Item>
+      : <><Nav.Item>
+        <Link to="/login">Login</Link>
+        </Nav.Item>
+      <Nav.Item>
+      <Link to="/createaccount">Create Account</Link>
+      </Nav.Item>
+      </>}
+      
         </Navbar>
     </Nav>
   )

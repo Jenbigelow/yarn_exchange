@@ -58,7 +58,7 @@ def liking(yarn_id):
    user = crud.get_user_by_id(primary_key)
 
    if user == None:
-      return(({"status": like, "user": primary_key, "yarn": yarn_id}))
+      return(jsonify({"status": like, "user": primary_key, "yarn": yarn_id}))
    if crud.find_fav_yarn(primary_key, yarn_id) != None:
       favorite_status = crud.change_fav_status(primary_key, yarn_id, like)
    else:
@@ -66,6 +66,12 @@ def liking(yarn_id):
    db.session.add(favorite_status)
    db.session.commit()
    return jsonify({"status": like, "user": primary_key, "yarn": yarn_id})
+
+@app.route("/api/sessionstatus")
+def show_like():
+   primary_key = session.get('user')
+   print(primary_key)
+   return jsonify({"user": primary_key})
 
 @app.route("/api/user/<user_id>")
 def get_user(user_id):
@@ -84,6 +90,7 @@ def list_yarn_weights():
 def search_yarns():
    yarn_weight = request.json.get("yarn_weight")
    return jsonify({"yarns": Yarn.get_yarn_by_weights(yarn_weight)})
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True, port=6060)
