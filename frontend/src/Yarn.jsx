@@ -4,6 +4,7 @@ import {
   useParams
 } from "react-router-dom";
 import SessionStatus from './SessionStatus';
+import { Button } from 'react-bootstrap';
   
   
   function Yarn() {
@@ -69,7 +70,9 @@ import SessionStatus from './SessionStatus';
     <div>
       Location: {yarn.seller_location}
     </div>
-    <button onClick ={handleLiking}>Like</button>
+    {sessionStatus !== null 
+       ?<Button onClick={handleLiking}>Like</Button>
+      : <Link to = {"/login"}>Login to like</Link>}
     <div>{message}</div>
     <div>
         <Link to="/yarns">Back to Yarns</Link>
