@@ -35,8 +35,51 @@
 
 .card {
   padding: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  border: 3px solid black;
+  width: 11em;
+  height: 25em;
+  margin: 2em;
+  padding: 1em;
+  display: inline-block;
+
+}
+
+.navbar{
+  background-color: #5998A6
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: #DAF7F3;
+}
+
+.navbar a:hover{
+  color:#72DFD0
+}
+
+.cardContainer{
+  object-fit: scale-down
+}
+.cardImage {
+  height: 10em;
 }
 
 .read-the-docs {
   color: #888;
 }
+
+.offcanvas{
+  
+}
+
+
+

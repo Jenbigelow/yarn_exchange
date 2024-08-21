@@ -27,7 +27,7 @@ R_PASSWORD = os.environ['R_PASSWORD']
 auth_params = (R_USERNAME, R_PASSWORD)
 payload = {
     "stash-status":"trade",
-    "page_size":"100"
+    "page_size":"200"
 }
 url ="https://api.ravelry.com/stash/search.json?query"
 
@@ -54,7 +54,7 @@ for yarn in stashes:
         if "$" in notes_html:
             seller_name = rav_username
             seller_location = user_location
-            yarn_price = re.search(r"\$[0-9]+", notes_html).group()
+            yarn_price = re.search(r"\$\s?[0-9]+", notes_html).group()
             yarn_price = int(yarn_price[1:])
             yarn_name = yarn_JSON_data["name"]
             yarn_weight = yarn_JSON_data["yarn_weight_name"]

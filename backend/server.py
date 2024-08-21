@@ -64,6 +64,7 @@ def liking(yarn_id):
       
       favorite_status = crud.change_fav_status(primary_key, yarn_id, like)
    else:
+      like = True
       favorite_status = crud.yarn_fav(user = user, yarn = yarn, favorite = True)
    db.session.add(favorite_status)
    db.session.commit()

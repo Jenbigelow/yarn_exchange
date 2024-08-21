@@ -3,11 +3,22 @@ import { Link, useParams, useNavigate, redirect } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import SessionStatus from "./SessionStatus";
+import Container from "react-bootstrap/Container";
+import yarn_ball from "./yarn_ball.png";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Search from "./Search";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 
 function GetYarns(props) {
   const navigate = useNavigate();
   const [priceSelect, setPriceSelect] = useState("");
   const [yarns, setYarns] = useState(props.yarns);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   if (yarns === undefined) {
     fetch("/api/yarns")
@@ -94,7 +105,16 @@ function GetYarns(props) {
             <option value="under20">Under $20</option>
             <option value="under30">Under $30</option> */}
           </select>
-          <Yarns yarns={yarns} />{" "}
+          <div>
+          <Button onClick={() => setShow(!show)}>Filter</Button>
+          <Offcanvas show={show} onHide={handleClose}>
+                    <Offcanvas.Header closeButton>
+        </Offcanvas.Header>
+<Search/>
+      </Offcanvas>
+          
+          </div>
+          <Yarns yarns={yarns} />
         </>
       )}
     </>
@@ -127,7 +147,13 @@ function Yarns(props) {
   return (
     <>
       <div></div>
-      {yarns === null ? <div>Loading...</div> : <div>{yarnCards}</div>}
+      {yarns === null ? <div>Loading...</div> :
+      <Container>
+        <Row xs={1} sm={2} md={3} lg={4}>
+          
+      {yarnCards}
+      </Row>
+      </Container>}
     </>
   );
 }
@@ -162,19 +188,27 @@ function YarnCard(props) {
     }
   // console.log(props)
   return (
+    <Col key={props.yarnId} className="mb-4">
     <Card key={props.yarnId}>
+      {/* <Container className ="cardContainer"> */}
+        {yarnPhoto !== null
+            ?<Card.Img className = "cardImage" src={`${yarnPhoto}`} />
+            :<Card.Img className = "cardImage" src={yarn_ball} />
+        }
+      <Card.Body>
       <Card.Title>
         <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
       </Card.Title>
       <Card.Subtitle>${yarnPrice}</Card.Subtitle>
-      <Card.Img src={`${yarnPhoto}`} />
-      <Card.Body>
+
         {sessionStatus !== null 
        ?<Button onClick={handleLiking}>Like</Button>
       : <Link to = {"/login"}>Login to like</Link>}
       </Card.Body>
       <div>{message}</div>
+      {/* </Container> */}
     </Card>
+    </Col>
   );
 }
 export default GetYarns;

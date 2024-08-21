@@ -3,11 +3,13 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import SessionStatus from './SessionStatus';
 
 
 function User(){
   const [yarns, setYarns] = useState({});
   const {userId} = useParams();
+  const sessionStatus = SessionStatus()
 
   useEffect(() => {
     fetch(`/api/user/${userId}`)
@@ -34,10 +36,17 @@ function User(){
     }
 return(
   <>
-   <><h3>Your favorites</h3></>
+  {sessionStatus !== null 
+ ?<>
+   <h3>Your favorites</h3>
    <div>{yarnCards}</div>
    <Link to="/yarns">All Yarns</Link>
-   </>)
+   </>
+
+   : <Link to="/login">Login to see favorites</Link>}
+    </>
+  )
+  
 }
 
 function YarnCard(props){

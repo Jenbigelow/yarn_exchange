@@ -16,26 +16,16 @@ import User from './User'
 import CreateAccount from './CreateAccount';
 import Seller from './Seller';
 import Search from './Search';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav'
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import SessionStatus from './SessionStatus';
+import NavigationBar from './Navbar';
+
 
 function Layout() {
   return(
-<nav>
-  <div>
-  <Link to="/login">Login</Link>
-  </div>
-  <div>
-  <Link to="/createaccount">Create Account</Link>
-  </div>
-  <div>
-  <Link to="/yarns">Yarns</Link>
-  </div>
+<>
+  <h1>Welcome!</h1>
+  <h2>Search yarns from Ravelry by price!</h2>
+  </>
 
-</nav>
   )
 }
 
@@ -45,7 +35,7 @@ function App() {
 
   return(
     <>
-    <Navigationbar> </Navigationbar> 
+    <NavigationBar> </NavigationBar> 
 
 
   <div>
@@ -68,32 +58,7 @@ function App() {
 )
 }
 
-function Navigationbar() {
-  const sessionStatus = SessionStatus()
-  return (
-      <Navbar expand="lg" fixed = "top">
-      <Container>
-      <Nav.Item>
-        <Link to="/yarns">Yarns</Link>
-        </Nav.Item>
-        <Nav.Item>
-        <Link to="/yarns/search/:yarnSelect">Filter</Link>
-        </Nav.Item>
-        {sessionStatus !== null 
-        
-      ? <Nav.Item><Link to={`/user/${sessionStatus}`}> Your favorites</Link></Nav.Item>
-      : <><Nav.Item>
-        <Link to="/login">Login</Link>
-        </Nav.Item>
-      <Nav.Item>
-      <Link to="/createaccount">Create Account</Link>
-      </Nav.Item>
-      </>}
-      </Container>
-        </Navbar>
 
-  )
-  }
 
 export default App
 
