@@ -49,9 +49,11 @@
 
 }
 
-.navbar{
+.fixed-top{
+
   background-color: #5998A6
 }
+
 
 .navbar a {
   float: left;
@@ -78,8 +80,15 @@
 }
 
 .offcanvas{
-  
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
 }
 
 
+
+body{
+  padding-top: 70px;
+}
 

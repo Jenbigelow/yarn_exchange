@@ -188,7 +188,7 @@ function YarnCard(props) {
     }
   // console.log(props)
   return (
-    <Col key={props.yarnId} className="mb-4">
+    <Col key={props.yarnId} className="mb-auto">
     <Card key={props.yarnId}>
       {/* <Container className ="cardContainer"> */}
         {yarnPhoto !== null

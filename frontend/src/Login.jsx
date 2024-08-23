@@ -59,7 +59,7 @@ const updatePassword = (evt) => {
     </p>
 
     <p>
-      <input type="submit"/>
+      <input type="submit" value = "Login"/>
     </p>
     <p>{message}</p>
   </form>

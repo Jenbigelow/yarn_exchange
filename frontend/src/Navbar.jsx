@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     Link,
   } from "react-router-dom";
@@ -7,24 +8,46 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import SessionStatus from './SessionStatus';
 import Col from "react-bootstrap/Col";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from "react-bootstrap/esm/Button";
+import Login from "./Login";
+import { CloseButton } from "react-bootstrap";
+import CreateAccount from "./CreateAccount";
+
 
 function NavigationBar() {
     const sessionStatus = SessionStatus()
+    const [showLogin, setShowLogin] = useState(false);
+    const [showCreateAccount, setShowCreateAccount] = useState(false);
+    const handleCloseLogin = () => setShowLogin(false);
+    const handleCloseCreateAccount= () => setShowCreateAccount(false);
     return (
-        <Navbar >
-          <Container fluid>
+        <Navbar className="fixed-top" expand="lg">
+          <Container>
         <Nav.Item>
           <Link to="/yarns">Yarns</Link>
           </Nav.Item>
           {sessionStatus !== null 
           
         ? <Nav.Item><Link to={`/user/${sessionStatus}`}> Your favorites</Link></Nav.Item>
-        : <><Nav.Item>
-          <Link to="/login">Login</Link>
-          </Nav.Item>
-        <Nav.Item>
-        <Link to="/createaccount">Create Account</Link>
-        </Nav.Item>
+        : <> 
+          
+          <Link onClick={() => setShowLogin(!showLogin)}>Login</Link>
+  
+          <Offcanvas show={showLogin}  >
+          <Offcanvas.Header closeButton onClick={handleCloseLogin}></Offcanvas.Header>
+          <Offcanvas.Body>
+          <Login/>
+          </Offcanvas.Body>
+          </Offcanvas>
+        
+        <Link onClick={() => setShowCreateAccount(!showCreateAccount)}>Create Account</Link>
+        <Offcanvas show={showCreateAccount} onSubmit={handleCloseCreateAccount} >
+          <Offcanvas.Header closeButton onClick={handleCloseCreateAccount}></Offcanvas.Header>
+          <Offcanvas.Body>
+          <CreateAccount/>
+          </Offcanvas.Body>
+          </Offcanvas>
         </>}
         </Container>
           </Navbar>
