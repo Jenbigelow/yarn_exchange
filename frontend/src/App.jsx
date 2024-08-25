@@ -45,7 +45,6 @@ function App() {
   <Route path="Login" element={<Login />} /><Route/>
   <Route path="/yarns" element ={<GetYarns/>}/> <Route/>
     <Route path="/yarns/:yarnId" element={<Yarn />} />
-    <Route path="/yarn_form" element ={<Search/>}/> <Route/>
     <Route path="/yarns/price" element ={<Yarns/>}/> <Route/>
   </Routes>
   </div>
