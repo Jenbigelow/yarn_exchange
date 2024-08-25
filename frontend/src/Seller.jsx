@@ -3,6 +3,10 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import YarnCard from './YarnCardSm';
+
 
 
 function Seller(){
@@ -38,35 +42,22 @@ return(
     {yarns[0] === undefined? (
     <div>Loading...</div>
   ) :(
-    <div>
+    <>
    <h1>{yarns[0].seller_name}</h1>
    <h4>{yarns[0].seller_location}</h4>
-   <div>{yarnCards}</div>
+   <Container>
+   <Row className = "mb-auto">
+   {yarnCards}
+   </Row>
+   </Container>
    <Link to="/yarns">All Yarns</Link>
-   </div>
+   </>
    )
 }
 </>
 )
 }
-function YarnCard(props){
-  const {yarnId, yarnName, yarnPrice, yarnPhoto} = props
-  // console.log(props)
-  return(
-    <div>        
-    <div>
-  <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
-  </div>
-  ${yarnPrice}
-    <div>
-    <img src={`${yarnPhoto}`}/>
-    </div>
 
-
-  </div>
-
-)
-}
 
 
 export default Seller

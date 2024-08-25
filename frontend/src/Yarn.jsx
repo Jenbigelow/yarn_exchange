@@ -5,6 +5,9 @@ import {
 } from "react-router-dom";
 import SessionStatus from './SessionStatus';
 import { Button } from 'react-bootstrap';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
   
   
@@ -51,20 +54,27 @@ import { Button } from 'react-bootstrap';
 
   return (
     <>
-    <div>{yarn.yarn_name} ({yarn.dyelot} company: {yarn.yarn_company})
+    <Container id = "yarnPage">
+    <Row >
+      <Col >
+      <div>
+    <img src={`${yarn.yarn_photo}`}/>
+    </div></Col>
+      <Col id = "yarnPageCol">
+      <div>
+      {yarn.yarn_name}
     </div>
     <div>
       ${yarn.yarn_price}
     </div>
-    <div>
-    <img src={`${yarn.yarn_photo}`}/>
-    </div>
+
     <div>
       {yarn.yarn_weight}
     </div>
     <div>
       {yarn.skeins}
     </div>
+
     <div>
       Ravelry seller:  <Link to ={`/seller/${yarn.seller_id}`}>{yarn.seller_name}</Link>
     </div>
@@ -78,6 +88,9 @@ import { Button } from 'react-bootstrap';
     <div>
         <Link to="/yarns">Back to Yarns</Link>
     </div>
+    </Col>
+    </Row>
+    </Container>
     </>
   
   )

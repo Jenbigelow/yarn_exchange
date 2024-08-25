@@ -56,6 +56,7 @@ class Yarn(db.Model):
                 "yarn_name": yarn.yarn_name,
                 "yarn_photo":yarn.yarn_photo,
                 "yarn_price": yarn.yarn_price,
+                "yarn_weight": yarn.yarn_weight
             }
             for yarn in cls.query.all()
         ]

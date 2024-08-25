@@ -92,3 +92,14 @@ body{
   padding-top: 70px;
 }
 
+#yarnPage{
+font-size: x-large;
+
+}
+
+#yarnPageCol{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}

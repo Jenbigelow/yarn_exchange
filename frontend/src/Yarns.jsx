@@ -9,27 +9,25 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Search from "./Search";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Accordion from "react-bootstrap/Accordion"
 
 
-function GetYarns(props) {
-  const navigate = useNavigate();
+function GetYarns() {
   const [priceSelect, setPriceSelect] = useState("");
-  const [yarns, setYarns] = useState(props.yarns);
-  const [show, setShow] = useState(false);
+  const [yarns, setYarns] = useState({});
+  const [yarnWeights, setYarnWeights] = useState('')
+  const [yarnSelect, setYarnSelect]= useState('')
+  const [allYarns, setAllYarns] = useState({})
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  if (yarns === undefined) {
+  useEffect(() => {
     fetch("/api/yarns")
       .then((response) => response.json())
       .then((yarnData) => {
-        setYarns(yarnData.yarns);
-        console.log(yarnData.yarns);
-        // const lowToHighYarns = Object.values(yarnData.yarns).sort((a, b) => a.yarn_price - b.yarn_price)
-        // setYarns(lowToHighYarns)
+        setYarns(yarnData.yarns)
+        setAllYarns(yarnData.yarns);
       });
-  }
+  }, []);
+
   const handlePricing = (evt) => {
     evt.preventDefault();
     setPriceSelect(evt.target.value);
@@ -50,6 +48,7 @@ function GetYarns(props) {
       console.log(`sorted`, highToLowYarns);
       setYarns(highToLowYarns);
     }
+    // consider just conditional rendering
     // if (evt.target.value === "under5") {
     //   const copyOfYarns = { ...yarns };
     //   const under5Yarns = []
@@ -88,10 +87,31 @@ function GetYarns(props) {
 
     // }
   };
+
+  const handleSelection = (evt) =>{
+    console.log(evt.target.value)
+    setYarnSelect(evt.target.value)
+  }
+  const handleSearch = (evt) => {
+    evt.preventDefault()
+    console.log("Form submitting")
+    console.log(yarnSelect)
+    console.log(allYarns)
+    const copyOfYarns = { ...allYarns };
+    const yarnSelectYarnsList = []
+  for (const copyOfYarn of Object.values(copyOfYarns)){
+    if (copyOfYarn.yarn_weight === yarnSelect) {
+    yarnSelectYarnsList.push(copyOfYarn)
+    console.log("here",yarnSelectYarnsList)}
+      setYarns(yarnSelectYarnsList)
+      console.log(yarnSelectYarnsList)
+    }
+  }
+    
   console.log(`runs every render`, yarns);
   return (
     <>
-      {yarns === undefined ? (
+      {yarns === null ? (
         <div>Loading...</div>
       ) : (
         <>
@@ -106,12 +126,113 @@ function GetYarns(props) {
             <option value="under30">Under $30</option> */}
           </select>
           <div>
-          <Button onClick={() => setShow(!show)}>Filter</Button>
-          <Offcanvas show={show} onHide={handleClose}>
-                    <Offcanvas.Header closeButton>
-        </Offcanvas.Header>
-<Search/>
-      </Offcanvas>
+          <Accordion>
+          <Accordion.Item eventKey="0">
+          <Accordion.Header>Filter</Accordion.Header>
+          <Accordion.Body>
+          <form onSubmit={handleSearch}>
+
+<div className="YarnWeights" onChange={handleSelection}>
+       <p>{"Cobweb"}
+        <input
+        type = "radio"
+        value = {"Cobweb"}
+        checked = {yarnSelect === "CobWeb"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Lace"}
+        <input
+        type = "radio"
+        value = {"Lace"}
+        checked = {yarnSelect === "Lace"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Light Fingering"}
+        <input
+        type = "radio"
+        value = {"Light Fingering"}
+        checked = {yarnSelect === "Light Fingering"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Fingering"}
+        <input
+        type = "radio"
+        value = {"Fingering"}
+        checked = {yarnSelect === "Fingering"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Sport"}
+        <input
+        type = "radio"
+        value = {"Sport"}
+        checked = {yarnSelect === "Sport"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"DK"}
+        <input
+        type = "radio"
+        value = {"DK"}
+        checked = {yarnSelect === "DK"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Worsted"}
+        <input
+        type = "radio"
+        value = {"Worsted"}
+        checked = {yarnSelect === "Worsted"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Aran"}
+        <input
+        type = "radio"
+        value = {"Aran"}
+        checked = {yarnSelect === "Aran"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Bulky"}
+        <input
+        type = "radio"
+        value = {"Bulky"}
+        checked = {yarnSelect === "Bulky"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+       <p>{"Super Bulky"}
+        <input
+        type = "radio"
+        value = {"Super Bulky"}
+        checked = {yarnSelect === "Super Bulky"}
+        onChange = {handleSelection}
+
+        />
+       </p>
+</div>
+<p>
+
+</p>
+ </form>
+
+            </Accordion.Body>
+            </Accordion.Item>
+            </Accordion>
+            <Button type="submit">Filter</Button>
           
           </div>
           <Yarns yarns={yarns} />
@@ -124,6 +245,7 @@ function GetYarns(props) {
 function Yarns(props) {
   const { yarns } = props;
   const sessionStatus = SessionStatus()
+  console.log(yarns)
   console.log(sessionStatus)
 
   console.log(`rendering yarns`, yarns)
@@ -148,12 +270,14 @@ function Yarns(props) {
     <>
       <div></div>
       {yarns === null ? <div>Loading...</div> :
+      
       <Container>
         <Row xs={1} sm={2} md={3} lg={4}>
           
       {yarnCards}
       </Row>
       </Container>}
+      
     </>
   );
 }
@@ -163,6 +287,7 @@ function YarnCard(props) {
   const [message, setMessage] = useState("");
   const {yarnId, yarnName, yarnPrice, yarnPhoto } = props;
   const sessionStatus = SessionStatus()
+
 
   const handleLiking = (evt) => {
     evt.preventDefault();

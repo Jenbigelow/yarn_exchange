@@ -6,13 +6,15 @@ import {
   redirect
 } from "react-router-dom";
 import User from './User'
+import Button from "react-bootstrap/Button";
+import { createContext, useContext } from 'react';
+const sessionStatus = createContext(null);
 
 
 function Login() {
 const [password, setPassword] = useState('')
 const [email, setEmail] = useState('')
 const [message, setMessage] = useState('')
-// const [status, setStatus] = useState('')
 const [userID, setUserID]= useState('')
 const navigate = useNavigate();
 

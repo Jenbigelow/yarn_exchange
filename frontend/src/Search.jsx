@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react'
-import {
-  Link,
-  useParams,
-  useNavigate,
-  redirect
-} from "react-router-dom";
+
 import GetYarns from "./Yarns"
 
-function Search(){
-
+function Search(props){
+  console.log(props)
     const [yarnWeights, setYarnWeights] = useState('')
     const [yarnSelect, setYarnSelect]= useState('')
-    const [yarns, setYarns] = useState('')
-    const navigate = useNavigate();
+    const [yarns, setYarns] = useState(props)
+
     useEffect(() => {
         fetch(`/api/yarn_form`)
           .then((response) => response.json())
@@ -47,23 +42,20 @@ function Search(){
         evt.preventDefault()
         console.log("Form submitting")
         console.log(yarnSelect)
-        fetch("/api/yarns_search", {
-            method: "POST",
-            body: JSON.stringify({'yarn_weight': yarnSelect}),
-            headers: {'Content-Type': 'application/json'}
-          })
-
-          .then((response) => response.json())
-          .then((yarnData) => {
-            setYarns(yarnData.yarns);
-            // return(<Yarns yarns = {yarnData.yarns}/>)
-            navigate(`/yarns/search/${yarnSelect}`)
-            
-          }
+        console.log(props.yarns)
+        const copyOfYarns = { ...props.yarns };
+        const yarnSelectYarnsList = []
+      for (const copyOfYarn of Object.values(copyOfYarns)){
+        if (copyOfYarn.yarn_weight === yarnSelect) {
+        yarnSelectYarnsList.push(copyOfYarn)
+        console.log("here",yarnSelectYarnsList)}
+          setYarns(yarnSelectYarnsList)
+          console.log(yarnSelectYarnsList)
+        }
+      }
         
-        );
-    }
-    if (yarns === ''){
+       
+
     return(
         <>
 
@@ -84,15 +76,7 @@ function Search(){
     )
 }
 
-else{console.log(yarns)
-  
-  return(
 
-    
-    <GetYarns yarns = {yarns}/>
-  )
-}
-}
 function YarnWeightOptions(props){
     const {yarnWeight, yarnSelect, handleSelection}= props
     // const [option, setOption] = useState (false)

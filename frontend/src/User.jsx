@@ -4,6 +4,9 @@ import {
   useParams
 } from "react-router-dom";
 import SessionStatus from './SessionStatus';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import YarnCard from './YarnCardSm';
 
 
 function User(){
@@ -39,34 +42,20 @@ return(
   {sessionStatus !== null 
  ?<>
    <h3>Your favorites</h3>
-   <div>{yarnCards}</div>
+   <Container>
+   <Row className = "mb-auto">
+   {yarnCards}
+   </Row>
+   </Container>
    <Link to="/yarns">All Yarns</Link>
    </>
 
    : <Link to="/login">Login to see favorites</Link>}
-    </>
+  </>
   )
   
 }
 
-function YarnCard(props){
-  const {yarnId, yarnName, yarnPrice, yarnPhoto} = props
-  // console.log(props)
-  return(
-    <div>
-    <div>
-  <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
-  </div>
-  ${yarnPrice}
-    <div>
-    <img src={`${yarnPhoto}`}/>
-    </div>
-
-
-  </div>
-
-)
-}
 
 
 export default User

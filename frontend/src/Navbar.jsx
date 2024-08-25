@@ -22,14 +22,11 @@ function NavigationBar() {
     const handleCloseLogin = () => setShowLogin(false);
     const handleCloseCreateAccount= () => setShowCreateAccount(false);
     return (
-        <Navbar className="fixed-top" expand="lg">
-          <Container>
-        <Nav.Item>
+        <Navbar className="fixed-top" expand="lg" >
           <Link to="/yarns">Yarns</Link>
-          </Nav.Item>
           {sessionStatus !== null 
           
-        ? <Nav.Item><Link to={`/user/${sessionStatus}`}> Your favorites</Link></Nav.Item>
+        ? <Link to={`/user/${sessionStatus}`}> Your favorites</Link>
         : <> 
           
           <Link onClick={() => setShowLogin(!showLogin)}>Login</Link>
@@ -49,7 +46,6 @@ function NavigationBar() {
           </Offcanvas.Body>
           </Offcanvas>
         </>}
-        </Container>
           </Navbar>
   
     )
