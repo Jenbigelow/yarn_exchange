@@ -6,7 +6,6 @@ import SessionStatus from "./SessionStatus";
 import Container from "react-bootstrap/Container";
 import yarn_ball from "./yarn_ball.png";
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import Search from "./Search";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion"
@@ -225,14 +224,14 @@ function GetYarns() {
        </p>
 </div>
 <p>
-
+<Button type="submit">Filter</Button>
 </p>
  </form>
 
             </Accordion.Body>
             </Accordion.Item>
             </Accordion>
-            <Button type="submit">Filter</Button>
+            
           
           </div>
           <Yarns yarns={yarns} />

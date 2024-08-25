@@ -10,7 +10,6 @@ import {
 import Yarn from './Yarn'
 import GetYarns from './Yarns';
 import Yarns from './Yarns'
-import About from './About'
 import Login from './Login'
 import User from './User'
 import CreateAccount from './CreateAccount';
@@ -48,7 +47,6 @@ function App() {
   <Route path="/yarns" element ={<GetYarns/>}/> <Route/>
     <Route path="/yarns/:yarnId" element={<Yarn />} />
     <Route path="/yarn_form" element ={<Search/>}/> <Route/>
-    <Route path="/yarns/search/:yarnSelect" element ={<Search/>}/> <Route/>
     <Route path="/yarns/price" element ={<Yarns/>}/> <Route/>
   </Routes>
   </div>
