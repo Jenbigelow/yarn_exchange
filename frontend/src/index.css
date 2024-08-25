@@ -23,7 +23,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 10px;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -57,9 +57,12 @@ h1 {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.card-primary{
-  border-color: #5998A6;
+select{
+  background-color: #DAF7F3;
+  padding: 14 px;
+  border: none;
 }
+
 
 
 

@@ -9,12 +9,14 @@ function YarnCard(props){
     // console.log(props)
     return(
       <>
-      <Col key={props.yarnId} className="mb-auto">
-      <Card>
+      <Col key={props.yarnId} className="justify-content-center" >
+      <Card style={{ height: '25rem' }}>
+      <Card.Img className = "cardImage" src={`${yarnPhoto}`}/>
       <Card.Body>
       <Card.Title><Link to={`/yarns/${yarnId}`}> {yarnName}</Link> </Card.Title>
       <Card.Subtitle>${yarnPrice}</Card.Subtitle>
-      <Card.Img className = "cardImage" src={`${yarnPhoto}`}/>
+      <Card.Text></Card.Text>  
+      
   
     </Card.Body>
       </Card>

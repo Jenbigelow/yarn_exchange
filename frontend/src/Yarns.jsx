@@ -8,7 +8,9 @@ import yarn_ball from "./yarn_ball.png";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Accordion from "react-bootstrap/Accordion"
+import Accordion from "react-bootstrap/Accordion";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 
 function GetYarns() {
@@ -27,6 +29,11 @@ function GetYarns() {
       });
   }, []);
 
+  const showAllYarns = (evt) => {
+    evt.preventDefault();
+    setYarns(allYarns)
+
+  }
   const handlePricing = (evt) => {
     evt.preventDefault();
     setPriceSelect(evt.target.value);
@@ -48,58 +55,56 @@ function GetYarns() {
       setYarns(highToLowYarns);
     }
     // consider just conditional rendering
-    // if (evt.target.value === "under5") {
-    //   const copyOfYarns = { ...yarns };
-    //   const under5Yarns = []
-    //   for (const copyOfYarn of Object.values(copyOfYarns)){
-    //     if (copyOfYarn.yarn_price <= 5) {
-    //     under5Yarns.push(copyOfYarn)
-    //     console.log("here",under5Yarns)
+    if (evt.target.value === "under5") {
+      const copyOfYarns = { ...yarns };
+      const under5Yarns = []
+      for (const copyOfYarn of Object.values(copyOfYarns)){
+        if (copyOfYarn.yarn_price <= 5) {
+        under5Yarns.push(copyOfYarn)
+        console.log("here",under5Yarns)
 
-    //     }
-    // }
-    // const sortedunder5Yarns = Object.values(under5Yarns).sort(
-    //   (a, b) => (a.yarn_price - b.yarn_price )
-    // )
+        }
+    }
+  
+    const sortedunder5Yarns = Object.values(under5Yarns).sort(
+      (a, b) => (a.yarn_price - b.yarn_price )
+    )
       
-    //   console.log(`sorted`,sortedunder5Yarns);
-    //   setYarns(sortedunder5Yarns);
+      console.log(`sorted`,sortedunder5Yarns);
+      setYarns(sortedunder5Yarns);
 
-    // }
+    }
 
-    // if (evt.target.value === "under10") {
-    //   const copyOfYarns = { ...yarns };
-    //   const under10Yarns = []
-    //   for (const copyOfYarn of Object.values(copyOfYarns)){
-    //     if (copyOfYarn.yarn_price <= 10) {
-    //     under10Yarns.push(copyOfYarn)
-    //     console.log("here",under10Yarns)
+    if (evt.target.value === "under10") {
+      const copyOfYarns = { ...yarns };
+      const under10Yarns = []
+      for (const copyOfYarn of Object.values(copyOfYarns)){
+        if (copyOfYarn.yarn_price <= 10) {
+        under10Yarns.push(copyOfYarn)
+        console.log("here",under10Yarns)
 
-    //     }
-    // }
-    // const sortedunder10Yarns = Object.values(under10Yarns).sort(
-    //   (a, b) => (a.yarn_price - b.yarn_price )
-    // )
+        }
+    }
+    const sortedunder10Yarns = Object.values(under10Yarns).sort(
+      (a, b) => (a.yarn_price - b.yarn_price )
+    )
       
-    //   console.log(`sorted`,sortedunder10Yarns);
-    //   setYarns(sortedunder10Yarns);
+      console.log(`sorted`,sortedunder10Yarns);
+      setYarns(sortedunder10Yarns);
 
-    // }
+    }
   };
 
-  const handleSelection = (evt) =>{
-    console.log(evt.target.value)
-    setYarnSelect(evt.target.value)
-  }
   const handleSearch = (evt) => {
     evt.preventDefault()
+    setYarnSelect(evt.target.value)
     console.log("Form submitting")
     console.log(yarnSelect)
     console.log(allYarns)
     const copyOfYarns = { ...allYarns };
     const yarnSelectYarnsList = []
   for (const copyOfYarn of Object.values(copyOfYarns)){
-    if (copyOfYarn.yarn_weight === yarnSelect) {
+    if (copyOfYarn.yarn_weight === evt.target.value) {
     yarnSelectYarnsList.push(copyOfYarn)
     console.log("here",yarnSelectYarnsList)}
       setYarns(yarnSelectYarnsList)
@@ -115,125 +120,36 @@ function GetYarns() {
       ) : (
         <>
           <h1>Yarns</h1>
-          <select onChange={handlePricing}>
-            <option value="">--Please choose an option--</option>
-            <option value="lowToHigh">Sort Price Low to High</option>
-            <option value="highToLow">Sort Price High to Low</option>
-            {/* <option value="under5">Under $5</option>
-            <option value="under10">Under $10</option>
-            <option value="under20">Under $20</option>
-            <option value="under30">Under $30</option> */}
-          </select>
-          <div>
-          <Accordion>
-          <Accordion.Item eventKey="0">
-          <Accordion.Header>Filter</Accordion.Header>
-          <Accordion.Body>
-          <form onSubmit={handleSearch}>
+          <DropdownButton
+        variant="primary"
+        title="Filter by Yarn Weight"
+        className = "my-3"
+      >
+        <Dropdown.Item as="button" onClick={handleSearch} value="Cobweb">Cobweb</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Lace">Lace</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Light Fingering">Light Fingering</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Sport">Sport</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="DK">DK</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Worsted">Worsted</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Aran">Aran</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Bulky">Bulky</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handleSearch} value="Super Bulky">Super Bulky</Dropdown.Item>
+        </DropdownButton>
 
-<div className="YarnWeights" onChange={handleSelection}>
-       <p>{"Cobweb"}
-        <input
-        type = "radio"
-        value = {"Cobweb"}
-        checked = {yarnSelect === "CobWeb"}
-        onChange = {handleSelection}
+          <DropdownButton
+        variant="primary"
+        title="Sort By Price"
+        className = "my-2"
+        
+      >
+        <Dropdown.Item as="button" onClick={handlePricing}value="lowToHigh">Sort Price Low to High</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handlePricing} value="highToLow">Sort Price High to Low</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handlePricing} value="under5">under $5</Dropdown.Item>
+        <Dropdown.Item as="button" onClick={handlePricing} value="under10">under $10</Dropdown.Item>
+      </DropdownButton>
 
-        />
-       </p>
-       <p>{"Lace"}
-        <input
-        type = "radio"
-        value = {"Lace"}
-        checked = {yarnSelect === "Lace"}
-        onChange = {handleSelection}
+          <Button onClick={showAllYarns} className = "my-2">Show All Yarns</Button>
 
-        />
-       </p>
-       <p>{"Light Fingering"}
-        <input
-        type = "radio"
-        value = {"Light Fingering"}
-        checked = {yarnSelect === "Light Fingering"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Fingering"}
-        <input
-        type = "radio"
-        value = {"Fingering"}
-        checked = {yarnSelect === "Fingering"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Sport"}
-        <input
-        type = "radio"
-        value = {"Sport"}
-        checked = {yarnSelect === "Sport"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"DK"}
-        <input
-        type = "radio"
-        value = {"DK"}
-        checked = {yarnSelect === "DK"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Worsted"}
-        <input
-        type = "radio"
-        value = {"Worsted"}
-        checked = {yarnSelect === "Worsted"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Aran"}
-        <input
-        type = "radio"
-        value = {"Aran"}
-        checked = {yarnSelect === "Aran"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Bulky"}
-        <input
-        type = "radio"
-        value = {"Bulky"}
-        checked = {yarnSelect === "Bulky"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-       <p>{"Super Bulky"}
-        <input
-        type = "radio"
-        value = {"Super Bulky"}
-        checked = {yarnSelect === "Super Bulky"}
-        onChange = {handleSelection}
-
-        />
-       </p>
-</div>
-<p>
-<Button type="submit">Filter</Button>
-</p>
- </form>
-
-            </Accordion.Body>
-            </Accordion.Item>
-            </Accordion>
-            
-          
-          </div>
           <Yarns yarns={yarns} />
         </>
       )}
@@ -271,7 +187,7 @@ function Yarns(props) {
       {yarns === null ? <div>Loading...</div> :
       
       <Container>
-        <Row xs={1} sm={2} md={3} lg={4}>
+        <Row xs={1} sm={2} md={2} lg={4}>
           
       {yarnCards}
       </Row>
@@ -312,8 +228,8 @@ function YarnCard(props) {
     }
   // console.log(props)
   return (
-    <Col key={props.yarnId} className="mb-auto">
-    <Card key={props.yarnId} border="primary">
+    <Col key={props.yarnId}  >
+    <Card key={props.yarnId} style={{ height: '30rem' }}>
       {/* <Container className ="cardContainer"> */}
         {yarnPhoto !== null
             ?<Card.Img className = "cardImage" src={`${yarnPhoto}`} />
@@ -324,11 +240,15 @@ function YarnCard(props) {
         <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
       </Card.Title>
       <Card.Subtitle>${yarnPrice}</Card.Subtitle>
+<Card.Text></Card.Text>
+</Card.Body>
+<Card.Footer>
 
         {sessionStatus !== null 
        ?<Button onClick={handleLiking}>Like</Button>
       : <Link to = {"/login"}>Login to like</Link>}
-      </Card.Body>
+      </Card.Footer>  
+
       <div>{message}</div>
       {/* </Container> */}
     </Card>

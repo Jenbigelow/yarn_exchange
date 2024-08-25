@@ -46,7 +46,7 @@ return(
    <h1>{yarns[0].seller_name}</h1>
    <h4>{yarns[0].seller_location}</h4>
    <Container>
-   <Row className = "mb-auto">
+   <Row  xs={1} sm={2} md={2} lg={3}>
    {yarnCards}
    </Row>
    </Container>

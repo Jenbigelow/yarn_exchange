@@ -43,7 +43,7 @@ return(
  ?<>
    <h3>Your favorites</h3>
    <Container>
-   <Row className = "mb-auto">
+   <Row xs={1} sm={2} md={2} lg={3}>
    {yarnCards}
    </Row>
    </Container>

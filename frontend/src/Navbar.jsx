@@ -13,7 +13,7 @@ import Button from "react-bootstrap/esm/Button";
 import Login from "./Login";
 import { CloseButton } from "react-bootstrap";
 import CreateAccount from "./CreateAccount";
-
+import yarn_ball from "./yarn_ball.png";
 
 function NavigationBar() {
     const sessionStatus = SessionStatus()
@@ -23,9 +23,10 @@ function NavigationBar() {
     const handleCloseCreateAccount= () => setShowCreateAccount(false);
     return (
         <Navbar className="fixed-top" expand="lg" >
+          <img src={yarn_ball} className="logo" />
           <Link to="/yarns">Yarns</Link>
           {sessionStatus !== null 
-          
+
         ? <Link to={`/user/${sessionStatus}`}> Your favorites</Link>
         : <> 
           

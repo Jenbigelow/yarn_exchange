@@ -35,13 +35,13 @@
 
 .card {
   display: flex;
+  flex-wrap: wrap;
   justify-content: stretch;
-  align-items: stretch;
-  width: 12em;
-  height: 50em;
+  align-items: stretch; 
+  width: 15em;
   margin: 2em;
-  padding: 1em;
-
+  padding: 2em;
+  border-color:#5998A6 !important
 }
 
 
@@ -58,6 +58,8 @@
   padding: 14px 16px;
   text-decoration: none;
   color: #DAF7F3;
+  font-size: large;
+  font-weight: bold;
 }
 
 .navbar a:hover{
@@ -98,4 +100,19 @@ font-size: x-large;
   flex-direction: column;
   justify-content: center;
 
+}
+
+.YarnWeights{
+  float: left;
+
+}
+
+.card-footer{
+  background-color: transparent !important;
+  border: none !important; 
+}
+
+.card-subtitle{
+  font-size:larger!important;
+  padding-top: 0.8rem
 }
