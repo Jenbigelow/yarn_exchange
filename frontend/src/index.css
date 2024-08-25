@@ -57,6 +57,9 @@ h1 {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.card-primary{
+  border-color: #5998A6;
+}
 
 
 

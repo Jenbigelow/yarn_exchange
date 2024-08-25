@@ -14,7 +14,6 @@ import Login from './Login'
 import User from './User'
 import CreateAccount from './CreateAccount';
 import Seller from './Seller';
-import Search from './Search';
 import NavigationBar from './Navbar';
 
 

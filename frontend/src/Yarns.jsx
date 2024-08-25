@@ -313,7 +313,7 @@ function YarnCard(props) {
   // console.log(props)
   return (
     <Col key={props.yarnId} className="mb-auto">
-    <Card key={props.yarnId}>
+    <Card key={props.yarnId} border="primary">
       {/* <Container className ="cardContainer"> */}
         {yarnPhoto !== null
             ?<Card.Img className = "cardImage" src={`${yarnPhoto}`} />
