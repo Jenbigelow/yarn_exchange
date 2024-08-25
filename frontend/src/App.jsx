@@ -15,6 +15,7 @@ import User from './User'
 import CreateAccount from './CreateAccount';
 import Seller from './Seller';
 import NavigationBar from './Navbar';
+import { SessionStatusProvider } from './SessionStatus';
 
 
 function Layout() {
@@ -26,13 +27,12 @@ function Layout() {
 
   )
 }
-
-
   
 function App() {
 
   return(
     <>
+    <SessionStatusProvider>
     <NavigationBar> </NavigationBar> 
 
 
@@ -49,7 +49,7 @@ function App() {
   </Routes>
   </div>
 
-  
+  </SessionStatusProvider>
     </>
 )
 }

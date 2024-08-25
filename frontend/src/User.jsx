@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import {
   Link,
   useParams
@@ -12,7 +12,7 @@ import YarnCard from './YarnCardSm';
 function User(){
   const [yarns, setYarns] = useState({});
   const {userId} = useParams();
-  const sessionStatus = SessionStatus()
+  const [user, setUser] = useContext(SessionStatus)
 
   useEffect(() => {
     fetch(`/api/user/${userId}`)
@@ -39,7 +39,7 @@ function User(){
     }
 return(
   <>
-  {sessionStatus !== null 
+  {user !== null 
  ?<>
    <h3>Your favorites</h3>
    <Container>

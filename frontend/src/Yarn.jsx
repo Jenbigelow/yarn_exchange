@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { useContext } from 'react';
 
   
   
@@ -16,7 +17,7 @@ import Container from "react-bootstrap/Container";
     const [fav, setFav] = useState(false)
     const [message, setMessage] = useState ('')
     const {yarnId} = useParams();
-    const sessionStatus = SessionStatus()
+    const [user, setUser] = useContext(SessionStatus)
 
     useEffect(() => {
       fetch(`/api/yarns/${yarnId}`)
@@ -32,7 +33,7 @@ import Container from "react-bootstrap/Container";
       console.log("button pressed");
       fetch(`/api/likes/${yarnId}`, {
         method: "POST",
-        body: JSON.stringify({ user: sessionStatus}),
+        body: JSON.stringify({ user: user}),
         headers: { "Content-Type": "application/json" },
         })
           .then((response) => response.json())
@@ -81,7 +82,7 @@ import Container from "react-bootstrap/Container";
     <div>
       Location: {yarn.seller_location}
     </div>
-    {sessionStatus !== null 
+    {user !== null 
        ?<Button onClick={handleLiking}>Like</Button>
       : <Link to = {"/login"}>Login to like</Link>}
     <div>{message}</div>

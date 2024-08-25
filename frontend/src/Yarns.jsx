@@ -11,6 +11,7 @@ import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton'
+import { useContext } from "react";
 
 
 function GetYarns() {
@@ -159,9 +160,7 @@ function GetYarns() {
 
 function Yarns(props) {
   const { yarns } = props;
-  const sessionStatus = SessionStatus()
   console.log(yarns)
-  console.log(sessionStatus)
 
   console.log(`rendering yarns`, yarns)
 
@@ -201,7 +200,7 @@ function YarnCard(props) {
   const [fav, setFav] = useState(false);
   const [message, setMessage] = useState("");
   const {yarnId, yarnName, yarnPrice, yarnPhoto } = props;
-  const sessionStatus = SessionStatus()
+  const [user, setUser] = useContext(SessionStatus)
 
 
   const handleLiking = (evt) => {
@@ -209,7 +208,7 @@ function YarnCard(props) {
     console.log("button pressed");
     fetch(`/api/likes/${yarnId}`, {
       method: "POST",
-      body: JSON.stringify({ user: sessionStatus}),
+      body: JSON.stringify({ user: user}),
       headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
@@ -226,7 +225,7 @@ function YarnCard(props) {
           }
           })
     }
-  // console.log(props)
+  console.log(user)
   return (
     <Col key={props.yarnId}  >
     <Card key={props.yarnId} style={{ height: '30rem' }}>
@@ -244,7 +243,7 @@ function YarnCard(props) {
 </Card.Body>
 <Card.Footer>
 
-        {sessionStatus !== null 
+        {user !== null 
        ?<Button onClick={handleLiking}>Like</Button>
       : <Link to = {"/login"}>Login to like</Link>}
       </Card.Footer>  

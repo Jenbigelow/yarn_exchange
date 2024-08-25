@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
     Link,
   } from "react-router-dom";
@@ -16,18 +16,18 @@ import CreateAccount from "./CreateAccount";
 import yarn_ball from "./yarn_ball.png";
 
 function NavigationBar() {
-    const sessionStatus = SessionStatus()
     const [showLogin, setShowLogin] = useState(false);
     const [showCreateAccount, setShowCreateAccount] = useState(false);
+    const [user, setUser] = useContext(SessionStatus)
     const handleCloseLogin = () => setShowLogin(false);
     const handleCloseCreateAccount= () => setShowCreateAccount(false);
     return (
         <Navbar className="fixed-top" expand="lg" >
           <img src={yarn_ball} className="logo" />
           <Link to="/yarns">Yarns</Link>
-          {sessionStatus !== null 
+          {user !== null 
 
-        ? <Link to={`/user/${sessionStatus}`}> Your favorites</Link>
+        ? <Link to={`/user/${user}`}> Your favorites</Link>
         : <> 
           
           <Link onClick={() => setShowLogin(!showLogin)}>Login</Link>

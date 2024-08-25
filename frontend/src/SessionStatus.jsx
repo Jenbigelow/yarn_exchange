@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate, redirect } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { createContext, useState } from "react";
 
+const SessionStatus = createContext(null);
 
-function SessionStatus() {
-  const [userId, setUserId]= useState("")
-  useEffect(() => {
-    fetch(`/api/sessionstatus`)
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        // console.log(responseJSON);
-        setUserId(responseJSON.user)
-        
-      })
-  }, []);
-  // console.log(userId)
-
-  return userId;
+export const SessionStatusProvider = ({ children }) =>{
+const [user, setUser] = useState(null);
+return(
+<SessionStatus.Provider value = {[user, setUser]}>
+  { children }
+</SessionStatus.Provider>
+)
 }
-
 export default SessionStatus;

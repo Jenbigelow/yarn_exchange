@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext} from 'react'
 import {
   Link,
   useParams,
@@ -6,7 +6,7 @@ import {
   redirect
 } from "react-router-dom";
 import User from './User'
-
+import SessionStatus from './SessionStatus';
 
 function CreateAccount() {
 const [password, setPassword] = useState('')
@@ -14,6 +14,7 @@ const [email, setEmail] = useState('')
 const [message, setMessage] = useState('')
 // const [status, setStatus] = useState('')
 const [userID, setUserID]= useState('')
+const [user, setUser]= useContext(SessionStatus)
 const navigate = useNavigate();
 
 const handleCreation = (evt) => {
@@ -31,6 +32,7 @@ const handleCreation = (evt) => {
             {
               if(responseJSON.status == 'true'){
                 setUserID(responseJSON.userID)
+                setUser(responseJSON.userID)
                 navigate(`/user/${responseJSON.userID}`)}
             
             else{{ setMessage(responseJSON.message)}}})

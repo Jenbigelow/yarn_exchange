@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext} from 'react'
 import {
   Link,
   useParams,
@@ -7,15 +7,14 @@ import {
 } from "react-router-dom";
 import User from './User'
 import Button from "react-bootstrap/Button";
-import { createContext, useContext } from 'react';
-const sessionStatus = createContext(null);
-
+import SessionStatus from './SessionStatus';
 
 function Login() {
 const [password, setPassword] = useState('')
 const [email, setEmail] = useState('')
 const [message, setMessage] = useState('')
 const [userID, setUserID]= useState('')
+const [user, setUser]= useContext(SessionStatus)
 const navigate = useNavigate();
 
 const handleLogin = (evt) => {
@@ -33,6 +32,7 @@ const handleLogin = (evt) => {
             {
               if(responseJSON.status == 'true'){
                 setUserID(responseJSON.userID)
+                setUser(responseJSON.userID)
                 navigate(`/user/${responseJSON.userID}`)}
             
             else{{ setMessage(responseJSON.message)}}})
