@@ -16,6 +16,7 @@ import CreateAccount from './CreateAccount';
 import Seller from './Seller';
 import NavigationBar from './Navbar';
 import { SessionStatusProvider } from './SessionStatus';
+import { FavoriteContextProvider } from './FavoriteContext';
 
 
 function Layout() {
@@ -33,6 +34,7 @@ function App() {
   return(
     <>
     <SessionStatusProvider>
+      <FavoriteContextProvider>
     <NavigationBar> </NavigationBar> 
 
 
@@ -48,7 +50,7 @@ function App() {
     <Route path="/yarns/price" element ={<Yarns/>}/> <Route/>
   </Routes>
   </div>
-
+  </FavoriteContextProvider>
   </SessionStatusProvider>
     </>
 )

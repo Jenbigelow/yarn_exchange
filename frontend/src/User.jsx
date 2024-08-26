@@ -7,18 +7,27 @@ import SessionStatus from './SessionStatus';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import YarnCard from './YarnCardSm';
+import FavoriteContext from './FavoriteContext';
 
 
 function User(){
   const [yarns, setYarns] = useState({});
   const {userId} = useParams();
   const [user, setUser] = useContext(SessionStatus)
+  const [favorites, setFavorites] = useContext(FavoriteContext)
 
   useEffect(() => {
     fetch(`/api/user/${userId}`)
       .then((response) => response.json())
       .then((yarnData) => {
         setYarns(yarnData.yarns);
+        const setOfYarns =  new Set()
+        for (const yarn of yarnData.yarns){
+          console.log(yarn)
+          setOfYarns.add(yarn.yarn_id)
+        }
+        console.log(setOfYarns)
+        setFavorites(setOfYarns)
       });
   }, []);
   console.log(yarns)

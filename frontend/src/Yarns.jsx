@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate, redirect } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -11,8 +11,7 @@ import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { useContext } from "react";
-
+import FavoriteContext from "./FavoriteContext";
 
 function GetYarns() {
   const [priceSelect, setPriceSelect] = useState("");
@@ -201,6 +200,7 @@ function YarnCard(props) {
   const [message, setMessage] = useState("");
   const {yarnId, yarnName, yarnPrice, yarnPhoto } = props;
   const [user, setUser] = useContext(SessionStatus)
+  const [favorites, setFavorites] = useContext(FavoriteContext)
 
 
   const handleLiking = (evt) => {
@@ -216,15 +216,20 @@ function YarnCard(props) {
           console.log(responseJSON);
           if (responseJSON.status === true) {
             setMessage("Liked!");
-            setFav[true]
+            setFav(true)
+            setFavorites(favorites.add(yarnId))
+          
           }
           else{
             setMessage("Unliked")
-            setFav[false]
+            setFav(false)
+            favorites.delete(yarnId)
+            setFavorites(favorites)
 
           }
           })
     }
+    console.log(favorites)
   console.log(user)
   return (
     <Col key={props.yarnId}  >
@@ -244,7 +249,10 @@ function YarnCard(props) {
 <Card.Footer>
 
         {user !== null 
-       ?<Button onClick={handleLiking}>Like</Button>
+       ? <>{favorites.has(yarnId)
+       ? <Button variant = "secondary" onClick={handleLiking}>Unlike</Button>
+       :<Button onClick={handleLiking}>Like</Button>
+       }</>
       : <Link to = {"/login"}>Login to like</Link>}
       </Card.Footer>  
 

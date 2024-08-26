@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { useContext } from 'react';
+import FavoriteContext from "./FavoriteContext";
 
   
   
@@ -18,6 +19,8 @@ import { useContext } from 'react';
     const [message, setMessage] = useState ('')
     const {yarnId} = useParams();
     const [user, setUser] = useContext(SessionStatus)
+    const [favorites, setFavorites] = useContext(FavoriteContext)
+    console.log(favorites)
 
     useEffect(() => {
       fetch(`/api/yarns/${yarnId}`)
@@ -41,11 +44,14 @@ import { useContext } from 'react';
             console.log(responseJSON);
             if (responseJSON.status === true) {
               setMessage("Liked!");
-              setFav[true]
+              setFav(true)
+              setFavorites(favorites.add(yarnId))
             }
             else{
               setMessage("Unliked")
-              setFav[false]
+              setFav(false)
+              favorites.delete(yarnId)
+              setFavorites(favorites)
   
             }
             })
@@ -83,7 +89,9 @@ import { useContext } from 'react';
       Location: {yarn.seller_location}
     </div>
     {user !== null 
-       ?<Button onClick={handleLiking}>Like</Button>
+       ? <>{favorites.has(yarnId)
+        ? <Button variant = "secondary" onClick={handleLiking}>Unlike</Button>
+        :<Button onClick={handleLiking}>Like</Button>}</>
       : <Link to = {"/login"}>Login to like</Link>}
     <div>{message}</div>
     <div>

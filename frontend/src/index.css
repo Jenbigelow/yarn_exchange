@@ -57,6 +57,13 @@ h1 {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
+
+.btn-secondary:hover{
+  background-color:#DAF7F3;
+  color:#000;
+}
+
 select{
   background-color: #DAF7F3;
   padding: 14 px;
@@ -76,5 +83,9 @@ select{
   }
   .btn-primary {
     background-color:#DAF7F3;
+  }
+  .btn-secondary {
+    background-color:#5998A6;
+    border-color: #000;
   }
 }
