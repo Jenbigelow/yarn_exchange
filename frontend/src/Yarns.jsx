@@ -12,6 +12,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import FavoriteContext from "./FavoriteContext";
+import heart from "./heart.svg"
 
 function GetYarns() {
   const [priceSelect, setPriceSelect] = useState("");
@@ -250,8 +251,8 @@ function YarnCard(props) {
 
         {user !== null 
        ? <>{favorites.has(yarnId)
-       ? <Button variant = "secondary" onClick={handleLiking}>Unlike</Button>
-       :<Button onClick={handleLiking}>Like</Button>
+       ? <Button variant = "secondary" onClick={handleLiking}>Unlike  </Button>
+       :<Button onClick={handleLiking}>Like <img src={heart}/></Button>
        }</>
       : <Link to = {"/login"}>Login to like</Link>}
       </Card.Footer>  

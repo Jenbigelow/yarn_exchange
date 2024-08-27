@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { useContext } from 'react';
 import FavoriteContext from "./FavoriteContext";
+import heart from "./heart.svg"
 
   
   
@@ -21,6 +22,11 @@ import FavoriteContext from "./FavoriteContext";
     const [user, setUser] = useContext(SessionStatus)
     const [favorites, setFavorites] = useContext(FavoriteContext)
     console.log(favorites)
+    console.log(`${Number(yarnId)}***`)
+    if (favorites.has(yarnId)){
+      console.log(true)
+    }
+    else{console.log(false)}
 
     useEffect(() => {
       fetch(`/api/yarns/${yarnId}`)
@@ -45,12 +51,12 @@ import FavoriteContext from "./FavoriteContext";
             if (responseJSON.status === true) {
               setMessage("Liked!");
               setFav(true)
-              setFavorites(favorites.add(yarnId))
+              setFavorites(favorites.add(Number(yarnId)))
             }
             else{
               setMessage("Unliked")
               setFav(false)
-              favorites.delete(yarnId)
+              favorites.delete(Number(yarnId))
               setFavorites(favorites)
   
             }
@@ -89,9 +95,9 @@ import FavoriteContext from "./FavoriteContext";
       Location: {yarn.seller_location}
     </div>
     {user !== null 
-       ? <>{favorites.has(yarnId)
+       ? <>{favorites.has(Number(yarnId))
         ? <Button variant = "secondary" onClick={handleLiking}>Unlike</Button>
-        :<Button onClick={handleLiking}>Like</Button>}</>
+        :<Button onClick={handleLiking}>Like <img src={heart}/></Button>}</>
       : <Link to = {"/login"}>Login to like</Link>}
     <div>{message}</div>
     <div>
