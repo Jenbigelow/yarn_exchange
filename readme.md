@@ -82,7 +82,7 @@ Run both the frontend and the backend:
 ```
 python3 server.py
 npm run dev
-``
+```
 
 
 <h2>Future Work</h2>
