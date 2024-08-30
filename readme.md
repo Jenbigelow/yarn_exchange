@@ -30,6 +30,20 @@
 <h2>Features</h2>
 <p>Users can see yarns for sale from Ravelry</p>
 <img src = screenshots/yarn_page.png alt="Yarn Page"/>
+<p>Users can sort by yarn weight and price</p>
+<img src = screenshots/filter_by_weight.png alt="Filter By Yarn Weight"/>
+<img src = screenshots/sort_by_price.png alt="Sort by Price"/>
+<p>Users can yarns they are interested once the login. The login uses a useContext hook to keep users logged in on the frontend without multiple queries to the back, and allows features like navbars to update in response to user login state.</p>
+<img src = screenshots/login.png alt="Login"/>
+<img src = screenshots/favorites.png alt="Favorites"/>
+<p>The main yarn page changes upon user login, using useContext to show a like button dependent on the current state of user's favorites.</p>
+<img src = screenshots/yarn_page_after_login.png alt="Yarn Page After Login"/>
+<p>Individual yarn pages retain the like or unlike button.</p>
+<img src = screenshots/individual_yarn.png alt="Individual Yarn Not Yet Liked"/>
+<img src = screenshots/individual_yarn_already_liked.png alt="Individual Yarn Already Liked"/>
+<p>Seller pages give all the yarn by a particular seller along with general location.</p>
+<img src = screenshots/seller_page.png alt="Seller Page"/>
+
 <h2>Installation</h2>
 
 <h2>Future Work</h2>
