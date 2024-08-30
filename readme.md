@@ -28,6 +28,8 @@
 <a href=https://dbdiagram.io/d/Yarn-Stash-Exchange-MVP-667b87599939893dae45a90c>Data Model for App </a>
 
 <h2>Features</h2>
+<p>Users can see yarns for sale from Ravelry</p>
+![alt text](https://github.com/Jenbigelow/yarn_exchange/screenshots/yarn_page.png "Yarn Page")
 
 <h2>Installation</h2>
 
