@@ -47,6 +47,11 @@
 <h2>Installation</h2>
 
 <h2>Future Work</h2>
+<ul>
+<li>More filters for sorting yarn by fiber, original yarn company, dyelot, color</li>
+<li>Connect to Ravelry with OAuth 2.0 API</li>
+<li>Allow users to add yarns and create bundles</li>
+</ul>
 
 <h2>About Me</h2>
 <p> Jen Bigelow created Yarn Stash Exchange - for more information, connect on <a href =https://www.linkedin.com/in/jen-bigelow>LinkedIn </a>
