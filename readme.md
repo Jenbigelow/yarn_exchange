@@ -45,11 +45,19 @@
 <img src = screenshots/seller_page.png alt="Seller Page"/>
 
 <h2>Installation</h2>
+To run Yarn Stash Exchange locally:
+Install Python 3.9.6
+Install PostgreSQL
+Install Vite
 
+Clone the repo:
+```
+https://github.com/Jenbigelow/yarn_exchange.git
+```
 
 <h2>Future Work</h2>
 <ul>
-<li>More filters for sorting yarn by fiber, original yarn company, dyelot, color</li>
+<li>More filters for sorting yarn by fiber, original yarn company, dye lot, color</li>
 <li>Connect to Ravelry with OAuth 2.0 API</li>
 <li>Allow users to add yarns and create bundles</li>
 </ul>
