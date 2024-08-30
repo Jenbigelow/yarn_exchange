@@ -29,8 +29,8 @@
 
 <h2>Features</h2>
 <p>Users can see yarns for sale from Ravelry</p>
-![alt text](https://github.com/Jenbigelow/yarn_exchange/blob/main/screenshots/yarn_page.png "Yarn Page")
-
+![alt text][yarn_page]
+[yarn_page]: (https://github.com/Jenbigelow/yarn_exchange/blob/main/screenshots/yarn_page.png "Yarn Page")
 <h2>Installation</h2>
 
 <h2>Future Work</h2>
