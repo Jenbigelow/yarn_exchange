@@ -54,9 +54,40 @@ Clone the repo:
 ```
 https://github.com/Jenbigelow/yarn_exchange.git
 ```
+Create a virtual environment:
+```
+virtualenv env
+source env/bin/activate
+```
+Install the requirements file:
+```
+pip3 install -r requirements.txt
+```
+Sign up for <a href=https://www.ravelry.com/api>Ravelry API</a>
+
+Save your API keys to a secrets.sh file in this format:
+```
+export R_USERNAME="YOUR_USERNAME_HERE"
+export R_PASSWORD="YOUR_PASSWORD_HERE"
+```
+Source the secrets:
+```
+source secrets.sh
+```
+Setup the initial databases:
+```
+python3 api.py
+```
+Run both the frontend and the backend:
+```
+python3 server.py
+npm run dev
+``
+
 
 <h2>Future Work</h2>
 <ul>
+<li>Set up so that yarns are continually updated from Ravelry</li>
 <li>More filters for sorting yarn by fiber, original yarn company, dye lot, color</li>
 <li>Connect to Ravelry with OAuth 2.0 API</li>
 <li>Allow users to add yarns and create bundles</li>
