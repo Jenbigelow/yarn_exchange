@@ -29,7 +29,7 @@
 
 <h2>Features</h2>
 <p>Users can see yarns for sale from Ravelry</p>
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+<img src = screenshots/yarn_page.png alt="Yarn Page"/>
 <h2>Installation</h2>
 
 <h2>Future Work</h2>
