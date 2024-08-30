@@ -49,4 +49,5 @@
 <h2>Future Work</h2>
 
 <h2>About Me</h2>
+<p> Jen Bigelow created Yarn Stash Exchange - for more information, connect on <a href =www.linkedin.com/in/jen-bigelow>LinkedIn </a>
 
