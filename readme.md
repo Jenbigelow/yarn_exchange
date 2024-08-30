@@ -29,8 +29,7 @@
 
 <h2>Features</h2>
 <p>Users can see yarns for sale from Ravelry</p>
-![alt text][yarn_page]
-[yarn_page]: (https://github.com/Jenbigelow/yarn_exchange/blob/main/screenshots/yarn_page.png "Yarn Page")
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 <h2>Installation</h2>
 
 <h2>Future Work</h2>
