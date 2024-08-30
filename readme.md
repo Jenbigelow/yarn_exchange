@@ -33,7 +33,7 @@
 <p>Users can sort by yarn weight and price</p>
 <img src = screenshots/filter_by_weight.png alt="Filter By Yarn Weight"/>
 <img src = screenshots/sort_by_price.png alt="Sort by Price"/>
-<p>Users can yarns they are interested once the login. The login uses a useContext hook to keep users logged in on the frontend without multiple queries to the back, and allows features like navbars to update in response to user login state.</p>
+<p>Users can favorite yarns they are interested once the login. The login uses a useContext hook to keep users logged in on the frontend without multiple queries to the back, and allows features like navbars to update in response to user login state.</p>
 <img src = screenshots/login.png alt="Login"/>
 <img src = screenshots/favorites.png alt="Favorites"/>
 <p>The main yarn page changes upon user login, using useContext to show a like button dependent on the current state of user's favorites.</p>
