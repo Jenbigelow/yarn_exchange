@@ -59,9 +59,10 @@ Create a virtual environment:
 virtualenv env
 source env/bin/activate
 ```
-Install the requirements file:
+Install the requirements file for backend and frontend:
 ```
 pip3 install -r requirements.txt
+npm install
 ```
 Sign up for <a href=https://www.ravelry.com/api>Ravelry API</a>
 
