@@ -15,9 +15,9 @@
 <ul>
 <li>PostgreSQL</li>
 <li>SQLAlchemy</li>
-<li>SQLAlchemy</li>
 <li>Flask</li>
 <li>AJAX</li>
+<li>Vite</li>
 <li>React</li>
 <li>React-Bootstrap</li>
 <li>JavaScript</li>
