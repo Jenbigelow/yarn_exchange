@@ -23,10 +23,10 @@ import heart from "./heart.svg"
     const [favorites, setFavorites] = useContext(FavoriteContext)
     console.log(favorites)
     console.log(`${Number(yarnId)}***`)
-    if (favorites.has(yarnId)){
-      console.log(true)
-    }
-    else{console.log(false)}
+    // if (favorites.has(yarnId)){
+    //   console.log(true)
+    // }
+    // else{console.log(false)}
 
     useEffect(() => {
       fetch(`/api/yarns/${yarnId}`)
@@ -63,7 +63,7 @@ import heart from "./heart.svg"
             })
       }
 
-
+console.log(user)
 
   return (
     <>
