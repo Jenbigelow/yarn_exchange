@@ -5,36 +5,35 @@ import Button from "react-bootstrap/Button";
 import SessionStatus from "./SessionStatus";
 import Container from "react-bootstrap/Container";
 import yarn_ball from "./yarn_ball.png";
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import Offcanvas from "react-bootstrap/Offcanvas";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import FavoriteContext from "./FavoriteContext";
-import heart from "./heart.svg"
+import heart from "./heart.svg";
 
 function GetYarns() {
   const [priceSelect, setPriceSelect] = useState("");
   const [yarns, setYarns] = useState({});
-  const [yarnWeights, setYarnWeights] = useState('')
-  const [yarnSelect, setYarnSelect]= useState('')
-  const [allYarns, setAllYarns] = useState({})
+  const [yarnWeights, setYarnWeights] = useState("");
+  const [yarnSelect, setYarnSelect] = useState("");
+  const [allYarns, setAllYarns] = useState({});
 
   useEffect(() => {
     fetch("/api/yarns")
       .then((response) => response.json())
       .then((yarnData) => {
-        setYarns(yarnData.yarns)
+        setYarns(yarnData.yarns);
         setAllYarns(yarnData.yarns);
       });
   }, []);
 
   const showAllYarns = (evt) => {
     evt.preventDefault();
-    setYarns(allYarns)
-
-  }
+    setYarns(allYarns);
+  };
   const handlePricing = (evt) => {
     evt.preventDefault();
     setPriceSelect(evt.target.value);
@@ -58,61 +57,58 @@ function GetYarns() {
     // consider just conditional rendering
     if (evt.target.value === "under5") {
       const copyOfYarns = { ...yarns };
-      const under5Yarns = []
-      for (const copyOfYarn of Object.values(copyOfYarns)){
+      const under5Yarns = [];
+      for (const copyOfYarn of Object.values(copyOfYarns)) {
         if (copyOfYarn.yarn_price <= 5) {
-        under5Yarns.push(copyOfYarn)
-        console.log("here",under5Yarns)
-
+          under5Yarns.push(copyOfYarn);
+          console.log("here", under5Yarns);
         }
-    }
-  
-    const sortedunder5Yarns = Object.values(under5Yarns).sort(
-      (a, b) => (a.yarn_price - b.yarn_price )
-    )
-      
-      console.log(`sorted`,sortedunder5Yarns);
-      setYarns(sortedunder5Yarns);
+      }
 
+      const sortedunder5Yarns = Object.values(under5Yarns).sort(
+        (a, b) => a.yarn_price - b.yarn_price
+      );
+
+      console.log(`sorted`, sortedunder5Yarns);
+      setYarns(sortedunder5Yarns);
     }
 
     if (evt.target.value === "under10") {
       const copyOfYarns = { ...yarns };
-      const under10Yarns = []
-      for (const copyOfYarn of Object.values(copyOfYarns)){
+      const under10Yarns = [];
+      for (const copyOfYarn of Object.values(copyOfYarns)) {
         if (copyOfYarn.yarn_price <= 10) {
-        under10Yarns.push(copyOfYarn)
-        console.log("here",under10Yarns)
-
+          under10Yarns.push(copyOfYarn);
+          console.log("here", under10Yarns);
         }
-    }
-    const sortedunder10Yarns = Object.values(under10Yarns).sort(
-      (a, b) => (a.yarn_price - b.yarn_price )
-    )
-      
-      console.log(`sorted`,sortedunder10Yarns);
-      setYarns(sortedunder10Yarns);
+      }
+      const sortedunder10Yarns = Object.values(under10Yarns).sort(
+        (a, b) => a.yarn_price - b.yarn_price
+      );
 
+      console.log(`sorted`, sortedunder10Yarns);
+      setYarns(sortedunder10Yarns);
     }
   };
 
   const handleSearch = (evt) => {
-    evt.preventDefault()
-    setYarnSelect(evt.target.value)
-    console.log("Form submitting")
-    console.log(yarnSelect)
-    console.log(allYarns)
+    evt.preventDefault();
+    setYarnSelect(evt.target.value);
+    console.log("Form submitting");
+    console.log(yarnSelect);
+    console.log(allYarns);
     const copyOfYarns = { ...allYarns };
-    const yarnSelectYarnsList = []
-  for (const copyOfYarn of Object.values(copyOfYarns)){
-    if (copyOfYarn.yarn_weight === evt.target.value) {
-    yarnSelectYarnsList.push(copyOfYarn)
-    console.log("here",yarnSelectYarnsList)}
-      setYarns(yarnSelectYarnsList)
-      console.log(yarnSelectYarnsList)
+    const yarnSelectYarnsList = [];
+    for (const copyOfYarn of Object.values(copyOfYarns)) {
+      if (copyOfYarn.yarn_weight === evt.target.value) {
+        yarnSelectYarnsList.push(copyOfYarn);
+        console.log("here", yarnSelectYarnsList);
+      }
+      setYarns(yarnSelectYarnsList);
+      console.log(yarnSelectYarnsList);
     }
-  }
-    
+  };
+
   console.log(`runs every render`, yarns);
   return (
     <>
@@ -122,34 +118,77 @@ function GetYarns() {
         <>
           <h1>Yarns</h1>
           <DropdownButton
-        variant="primary"
-        title="Filter by Yarn Weight"
-        className = "my-3"
-      >
-        <Dropdown.Item as="button" onClick={handleSearch} value="Cobweb">Cobweb</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Lace">Lace</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Light Fingering">Light Fingering</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Sport">Sport</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="DK">DK</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Worsted">Worsted</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Aran">Aran</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Bulky">Bulky</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handleSearch} value="Super Bulky">Super Bulky</Dropdown.Item>
-        </DropdownButton>
+            variant="primary"
+            title="Filter by Yarn Weight"
+            className="my-3"
+          >
+            <Dropdown.Item as="button" onClick={handleSearch} value="Cobweb">
+              Cobweb
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="Lace">
+              Lace
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={handleSearch}
+              value="Light Fingering"
+            >
+              Light Fingering
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="Sport">
+              Sport
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="DK">
+              DK
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="Worsted">
+              Worsted
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="Aran">
+              Aran
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleSearch} value="Bulky">
+              Bulky
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={handleSearch}
+              value="Super Bulky"
+            >
+              Super Bulky
+            </Dropdown.Item>
+          </DropdownButton>
 
           <DropdownButton
-        variant="primary"
-        title="Sort By Price"
-        className = "my-2"
-        
-      >
-        <Dropdown.Item as="button" onClick={handlePricing}value="lowToHigh">Sort Price Low to High</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handlePricing} value="highToLow">Sort Price High to Low</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handlePricing} value="under5">under $5</Dropdown.Item>
-        <Dropdown.Item as="button" onClick={handlePricing} value="under10">under $10</Dropdown.Item>
-      </DropdownButton>
+            variant="primary"
+            title="Sort By Price"
+            className="my-2"
+          >
+            <Dropdown.Item
+              as="button"
+              onClick={handlePricing}
+              value="lowToHigh"
+            >
+              Sort Price Low to High
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={handlePricing}
+              value="highToLow"
+            >
+              Sort Price High to Low
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handlePricing} value="under5">
+              under $5
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handlePricing} value="under10">
+              under $10
+            </Dropdown.Item>
+          </DropdownButton>
 
-          <Button onClick={showAllYarns} className = "my-2">Show All Yarns</Button>
+          <Button onClick={showAllYarns} className="my-2">
+            Show All Yarns
+          </Button>
 
           <Yarns yarns={yarns} />
         </>
@@ -160,9 +199,9 @@ function GetYarns() {
 
 function Yarns(props) {
   const { yarns } = props;
-  console.log(yarns)
+  console.log(yarns);
 
-  console.log(`rendering yarns`, yarns)
+  console.log(`rendering yarns`, yarns);
 
   const yarnCards = [];
   // if yarn is null
@@ -183,15 +222,15 @@ function Yarns(props) {
   return (
     <>
       <div></div>
-      {yarns === null ? <div>Loading...</div> :
-      
-      <Container>
-        <Row xs={1} sm={2} md={2} lg={4}>
-          
-      {yarnCards}
-      </Row>
-      </Container>}
-      
+      {yarns === null ? (
+        <div>Loading...</div>
+      ) : (
+        <Container>
+          <Row xs={1} sm={2} md={2} lg={3} xl={4}>
+            {yarnCards}
+          </Row>
+        </Container>
+      )}
     </>
   );
 }
@@ -199,67 +238,72 @@ function Yarns(props) {
 function YarnCard(props) {
   const [fav, setFav] = useState(false);
   const [message, setMessage] = useState("");
-  const {yarnId, yarnName, yarnPrice, yarnPhoto } = props;
-  const [user, setUser] = useContext(SessionStatus)
-  const [favorites, setFavorites] = useContext(FavoriteContext)
-
+  const { yarnId, yarnName, yarnPrice, yarnPhoto } = props;
+  const [user, setUser] = useContext(SessionStatus);
+  const [favorites, setFavorites] = useContext(FavoriteContext);
 
   const handleLiking = (evt) => {
     evt.preventDefault();
     console.log("button pressed");
     fetch(`/api/likes/${yarnId}`, {
       method: "POST",
-      body: JSON.stringify({ user: user}),
+      body: JSON.stringify({ user: user }),
       headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((responseJSON) => {
-          console.log(responseJSON);
-          if (responseJSON.status === true) {
-            setMessage("Liked!");
-            setFav(true)
-            setFavorites(favorites.add(yarnId))
-          
-          }
-          else{
-            setMessage("Unliked")
-            setFav(false)
-            favorites.delete(yarnId)
-            setFavorites(favorites)
-
-          }
-          })
-    }
-    console.log(favorites)
-  console.log(user)
-  return (
-    <Col key={props.yarnId}  >
-    <Card key={props.yarnId} style={{ height: '30rem' }}>
-      {/* <Container className ="cardContainer"> */}
-        {yarnPhoto !== null
-            ?<Card.Img className = "cardImage" src={`${yarnPhoto}`} />
-            :<Card.Img className = "cardImage" src={yarn_ball} />
+    })
+      .then((response) => response.json())
+      .then((responseJSON) => {
+        console.log(responseJSON);
+        if (responseJSON.status === true) {
+          setMessage("Liked!");
+          setFav(true);
+          setFavorites(favorites.add(yarnId));
+        } else {
+          setMessage("Unliked");
+          setFav(false);
+          favorites.delete(yarnId);
+          setFavorites(favorites);
         }
-      <Card.Body>
-      <Card.Title>
-        <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
-      </Card.Title>
-      <Card.Subtitle>${yarnPrice}</Card.Subtitle>
-<Card.Text></Card.Text>
-</Card.Body>
-<Card.Footer>
+      });
+  };
+  console.log(favorites);
+  console.log(user);
+  return (
+    <Col key={props.yarnId}>
+      <Card key={props.yarnId} style={{ height: "30rem" }}>
+        {/* <Container className ="cardContainer"> */}
+        {yarnPhoto !== null ? (
+          <Card.Img className="cardImage" src={`${yarnPhoto}`} />
+        ) : (
+          <Card.Img className="cardImage" src={yarn_ball} />
+        )}
+        <Card.Body>
+          <Card.Title>
+            <Link to={`/yarns/${yarnId}`}> {yarnName}</Link>
+          </Card.Title>
+          <Card.Subtitle>${yarnPrice}</Card.Subtitle>
+          <Card.Text></Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          {favorites !== null ? (
+            <>
+              {favorites.has(yarnId) ? (
+                <Button variant="secondary" onClick={handleLiking}>
+                  Unlike{" "}
+                </Button>
+              ) : (
+                <Button onClick={handleLiking}>
+                  Like <img src={heart} />
+                </Button>
+              )}
+            </>
+          ) : (
+            <Link to={"/login"}>Login to like</Link>
+          )}
+        </Card.Footer>
 
-        {user !== null 
-       ? <>{favorites.has(yarnId)
-       ? <Button variant = "secondary" onClick={handleLiking}>Unlike  </Button>
-       :<Button onClick={handleLiking}>Like <img src={heart}/></Button>
-       }</>
-      : <Link to = {"/login"}>Login to like</Link>}
-      </Card.Footer>  
-
-      <div>{message}</div>
-      {/* </Container> */}
-    </Card>
+        <div>{message}</div>
+        {/* </Container> */}
+      </Card>
     </Col>
   );
 }

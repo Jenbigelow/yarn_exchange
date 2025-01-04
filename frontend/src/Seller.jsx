@@ -1,17 +1,12 @@
-import { useEffect, useState } from 'react'
-import {
-  Link,
-  useParams
-} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import YarnCard from './YarnCardSm';
+import YarnCard from "./YarnCardSm";
 
-
-
-function Seller(){
+function Seller() {
   const [yarns, setYarns] = useState({});
-  const {sellerId} = useParams();
+  const { sellerId } = useParams();
 
   useEffect(() => {
     fetch(`/api/seller/${sellerId}`)
@@ -20,44 +15,40 @@ function Seller(){
         setYarns(yarnData.yarns);
       });
   }, []);
-  console.log(yarns)
+  console.log(yarns);
 
-  const yarnCards =[]
-    for (const yarn of Object.values(yarns)) {
-      const yarnCard = (
-        <YarnCard
-          key={yarn.yarn_id}
-          yarnId={yarn.yarn_id}
-          yarnName={yarn.yarn_name}
-          yarnPhoto={yarn.yarn_photo}
-          yarnPrice={yarn.yarn_price}
-          
-        />
-      );
-    
-      yarnCards.push(yarnCard);
-    }
-return(    
-    <>    
-    {yarns[0] === undefined? (
-    <div>Loading...</div>
-  ) :(
+  const yarnCards = [];
+  for (const yarn of Object.values(yarns)) {
+    const yarnCard = (
+      <YarnCard
+        key={yarn.yarn_id}
+        yarnId={yarn.yarn_id}
+        yarnName={yarn.yarn_name}
+        yarnPhoto={yarn.yarn_photo}
+        yarnPrice={yarn.yarn_price}
+      />
+    );
+
+    yarnCards.push(yarnCard);
+  }
+  return (
     <>
-   <h1>{yarns[0].seller_name}</h1>
-   <h4>{yarns[0].seller_location}</h4>
-   <Container>
-   <Row  xs={1} sm={2} md={2} lg={3}>
-   {yarnCards}
-   </Row>
-   </Container>
-   <Link to="/yarns">All Yarns</Link>
-   </>
-   )
+      {yarns[0] === undefined ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <h1>{yarns[0].seller_name}</h1>
+          <h4>{yarns[0].seller_location}</h4>
+          <Container>
+            <Row xs={1} sm={2} md={2} lg={yarnCards.length === 2 ? 2 : 3}>
+              {yarnCards}
+            </Row>
+          </Container>
+          <Link to="/yarns">All Yarns</Link>
+        </>
+      )}
+    </>
+  );
 }
-</>
-)
-}
 
-
-
-export default Seller
+export default Seller;
