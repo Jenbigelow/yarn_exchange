@@ -1,4 +1,5 @@
 <h1>Yarn Stash Exchange</h1>
+<p> Website at http://www.yarnxchange.net <p>
 
 <p>Yarn Stash Exchange is a secondhand marketplace that uses data from Ravelry, the most popular knitting and crocheting website, to gather yarns that Ravelry users want to sell. Ravelry’s stash feature allows users to track their yarns, but when they want to sell, they can only tag the yarn as “will trade or sell” and the price is hidden in the notes component. By using Ravelry’s API, the relevant pricing data is extracted using a custom search algorithm. The webapp allows users to filter the yarns by price and yarn weight and uses React for a fast and responsive user experience. Users can find yarns that fit their needs quickly, and find out all yarns available for sale by a seller and the sellers location. By signing in, the user can store favorited yarns, which show up on a convenient list on the user’s favorites page.</p>
 <h2>Contents</h2>
@@ -51,40 +52,52 @@ Install PostgreSQL
 Install Vite
 
 Clone the repo:
+
 ```
 https://github.com/Jenbigelow/yarn_exchange.git
 ```
+
 Create a virtual environment:
+
 ```
 virtualenv env
 source env/bin/activate
 ```
+
 Install the requirements file for backend and frontend:
+
 ```
 pip3 install -r requirements.txt
 npm install
 ```
+
 Sign up for <a href=https://www.ravelry.com/api>Ravelry API</a>
 
 Save your API keys to a secrets.sh file in this format:
+
 ```
 export R_USERNAME="YOUR_USERNAME_HERE"
 export R_PASSWORD="YOUR_PASSWORD_HERE"
 ```
+
 Source the secrets:
+
 ```
 source secrets.sh
 ```
+
 Setup the initial databases:
+
 ```
 python3 api.py
 ```
+
 Run both the frontend and the backend:
+
 ```
 python3 server.py
 npm run dev
 ```
-
 
 <h2>Future Work</h2>
 <ul>
@@ -96,4 +109,3 @@ npm run dev
 
 <h2>About Me</h2>
 <p> Jen Bigelow created Yarn Stash Exchange - for more information, connect on <a href =https://www.linkedin.com/in/jen-bigelow>LinkedIn </a>
-
